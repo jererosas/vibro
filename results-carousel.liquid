@@ -1,0 +1,61 @@
+<section class="results-vibro" id="resultados">
+  <div class="results-vibro-wide">
+    <h2 class="results-vibro-title">{{ section.settings.title }}</h2>
+    <div class="results-carousel" id="resultsCarousel" aria-label="Carrusel de resultados">
+      <div class="results-track" id="resultsTrack">
+        {% for block in section.blocks %}
+          <article class="rv-card" {{ block.shopify_attributes }}>
+            <div class="rv-media rv-media-img">
+              {% if block.settings.image != blank %}
+                <img class="rv-img-full" src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.name }}" loading="lazy">
+              {% else %}
+                <img class="rv-img-full" src="{{ block.settings.image_url }}" alt="{{ block.settings.name }}" loading="lazy">
+              {% endif %}
+              <span class="rv-tag rv-tag-left">ANTES</span>
+              <span class="rv-tag rv-tag-right">DESPUÉS</span>
+            </div>
+            <div class="rv-body">
+              <h3 class="rv-name">{{ block.settings.name }}</h3>
+              <p class="rv-quote">{{ block.settings.quote }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="results-scrollbar" aria-hidden="true">
+      <div class="results-scrollbar-track">
+        <div class="results-scrollbar-thumb" id="resultsThumb"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrusel de resultados",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Resultados con Vibro Sculpt" }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Resultado",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen (antes/después)" },
+        { "type": "text", "id": "image_url", "label": "URL de imagen (alternativa)" },
+        { "type": "text", "id": "name", "label": "Nombre" },
+        { "type": "textarea", "id": "quote", "label": "Testimonio" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Carrusel de resultados",
+    "blocks": [
+      { "type": "result", "settings": { "name": "Camila", "image_url": "{{ 'result-1.jpg' | asset_url }}", "quote": "\"Desde que uso Vibro Sculpt mi piel se ve más firme y bajé esos rollitos del abdomen…\"" } },
+      { "type": "result", "settings": { "name": "Alejandra", "image_url": "{{ 'result-2.jpg' | asset_url }}", "quote": "\"He probado muchos masajeadores, pero este es mi favorito.\"" } },
+      { "type": "result", "settings": { "name": "Laura", "image_url": "{{ 'result-3.jpg' | asset_url }}", "quote": "\"Está increíble. Paso el Vibro Sculpt y siento el masaje súper profundo.\"" } },
+      { "type": "result", "settings": { "name": "Valentina", "image_url": "{{ 'result-4.jpg' | asset_url }}", "quote": "\"Con apenas 10 minutos diarios, Vibro Sculpt me permite tonificar brazos y piernas.\"" } }
+    ]
+  }]
+}
+{% endschema %}

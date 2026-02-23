@@ -1,0 +1,62 @@
+<header class="site-header" id="header">
+  <div class="site-header-wide">
+    <button class="site-burger" type="button" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false" id="burgerBtn">☰</button>
+    <a class="site-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      <span class="site-brand-text">{{ section.settings.brand_name }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#inicio" class="site-nav-link is-active">INICIO</a>
+      <a href="#producto" class="site-nav-link">VIBRO SCULPT</a>
+      <a href="#nosotros" class="site-nav-link">NOSOTROS</a>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-menu-backdrop" id="menuBackdrop" hidden></div>
+<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-header">
+    <button class="mobile-menu-close" type="button" aria-label="Cerrar menú" id="menuCloseBtn">×</button>
+  </div>
+  <div class="mobile-menu-hero">
+    <div class="mm-hero-media" aria-hidden="true"></div>
+    <div class="mm-hero-meta">
+      <div class="mm-stars" aria-label="5 estrellas">★★★★★</div>
+      <div class="mm-title">Vibro Sculpt™</div>
+      <div class="mm-price">{{ section.settings.product_price }}</div>
+      <a class="mm-cta" href="#producto">COMPRA AHORA <span aria-hidden="true">›</span></a>
+    </div>
+  </div>
+  <nav class="mobile-menu-links" aria-label="Menú">
+    <a class="mm-link" href="#inicio"><span>INICIO</span><span class="mm-arrow">›</span></a>
+    <a class="mm-link" href="#producto"><span>VIBRO SCULPT</span><span class="mm-arrow">›</span></a>
+    <a class="mm-link" href="#nosotros"><span>NOSOTROS</span><span class="mm-arrow">›</span></a>
+  </nav>
+  <div class="mobile-menu-help">
+    <div class="mm-help-title">AYUDA</div>
+    <a class="mm-help-link" href="#">Contáctanos</a>
+    <a class="mm-help-link" href="#">Centro de Ayuda</a>
+  </div>
+  <div class="mobile-menu-footer">
+    <div class="mm-copy">© 2026 Vibro Sculpt.</div>
+    <div class="mm-social">
+      {% if section.settings.instagram_url != blank %}
+        <a class="mm-social-btn" href="{{ section.settings.instagram_url }}" aria-label="Instagram">◎</a>
+      {% endif %}
+      {% if section.settings.facebook_url != blank %}
+        <a class="mm-social-btn" href="{{ section.settings.facebook_url }}" aria-label="Facebook">f</a>
+      {% endif %}
+    </div>
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Nombre de marca", "default": "VibroSculpt" },
+    { "type": "text", "id": "product_price", "label": "Precio en menú móvil", "default": "$ 1,349.00" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook URL" }
+  ]
+}
+{% endschema %}

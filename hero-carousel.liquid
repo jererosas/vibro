@@ -1,0 +1,28 @@
+<section class="hero-carousel" id="inicio" aria-label="Hero">
+  <div class="hero-carousel-viewport" id="heroCarousel">
+    <article class="hero-slide is-active">
+      <video class="hero-media" autoplay muted loop playsinline preload="metadata">
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="hero-eyebrow">{{ section.settings.eyebrow }}</p>
+        <h1 class="hero-title">{{ section.settings.title }}</h1>
+        <button class="hero-cta" type="button" data-scroll="#producto">{{ section.settings.cta_text }}</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "video_url", "label": "URL del video", "default": "https://cdn.shopify.com/videos/c/o/v/d06387b6919649beba4ea29da6772939.mp4" },
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "TODO LO QUE NECESITAS" },
+    { "type": "text", "id": "title", "label": "Título principal", "default": "PARA MOLDEAR TU CUERPO" },
+    { "type": "text", "id": "cta_text", "label": "Texto del botón", "default": "EMPIEZA HOY" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

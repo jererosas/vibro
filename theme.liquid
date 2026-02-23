@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page_title }} - {{ shop.name }}</title>
+  <meta name="description" content="{{ page_description | escape }}">
+  {{ content_for_header }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+</head>
+<body>
+{{ content_for_layout }}
+<script src="{{ 'script.js' | asset_url }}" defer></script>
+</body>
+</html>

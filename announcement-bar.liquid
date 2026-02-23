@@ -1,0 +1,35 @@
+<div class="top-announcement" role="region" aria-label="Anuncio">
+  <button class="top-ann-btn top-ann-prev" type="button" aria-label="Anterior">‹</button>
+  <div class="top-ann-viewport" id="topAnnViewport" aria-live="polite">
+    <div class="top-ann-track" id="topAnnTrack">
+      {% for block in section.blocks %}
+        <span class="top-ann-item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  <button class="top-ann-btn top-ann-next" type="button" aria-label="Siguiente">›</button>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "tag": "div",
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Anuncio",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "ENVÍO GRATIS A TODO MÉXICO" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Barra de anuncios",
+    "blocks": [
+      { "type": "announcement", "settings": { "text": "GARANTÍA DE SATISFACCIÓN" } },
+      { "type": "announcement", "settings": { "text": "ENVÍO GRATIS A TODO MÉXICO" } },
+      { "type": "announcement", "settings": { "text": "PAGO SEGURO" } }
+    ]
+  }]
+}
+{% endschema %}

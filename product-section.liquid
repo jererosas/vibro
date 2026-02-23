@@ -1,0 +1,291 @@
+{% assign current_product = all_products[section.settings.product_handle] %}
+
+<section class="product-section" id="producto">
+  <div class="container">
+    <div class="product-layout">
+
+      <!-- Galería de imágenes -->
+      <div class="product-images">
+        <div class="images-container images-left-thumbs">
+          <div class="thumbs-col">
+            <div class="thumbnail-grid thumbnails-vertical" id="productThumbs" role="list">
+              {% if current_product != blank %}
+                {% for media in current_product.media %}
+                  <button class="thumbnail {% if forloop.first %}active{% endif %}" type="button" role="listitem"
+                    data-type="{% if media.media_type == 'video' %}video{% else %}image{% endif %}"
+                    data-src="{% if media.media_type == 'video' %}{{ media.sources[1].url }}{% else %}{{ media | img_url: '800x' }}{% endif %}"
+                    aria-label="{{ media.alt | default: 'Imagen' }} {{ forloop.index }}">
+                    <img src="{{ media | img_url: '120x' }}" alt="{{ media.alt }}" loading="lazy" decoding="async">
+                  </button>
+                {% endfor %}
+              {% else %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'gallery_image' %}
+                    <button class="thumbnail {% if forloop.first %}active{% endif %}" type="button" role="listitem"
+                      data-type="{{ block.settings.media_type }}"
+                      data-src="{% if block.settings.image != blank %}{{ block.settings.image | img_url: '800x' }}{% else %}{{ block.settings.image_url }}{% endif %}"
+                      aria-label="Imagen {{ forloop.index }}" {{ block.shopify_attributes }}>
+                      <img src="{% if block.settings.image != blank %}{{ block.settings.image | img_url: '120x' }}{% else %}{{ block.settings.image_url }}{% endif %}" alt="" loading="lazy" decoding="async">
+                    </button>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="main-image" id="productMainMedia">
+            <img id="productMainImg" class="product-main-img"
+              src="{% if current_product != blank %}{{ current_product.featured_image | img_url: '800x' }}{% else %}{{ section.settings.main_image_url }}{% endif %}"
+              alt="{{ current_product.title | default: section.settings.product_title }}"
+              loading="eager" decoding="async">
+            <video id="productMainVideo" class="product-main-video" muted playsinline controls preload="auto"
+              poster="{% if current_product != blank %}{{ current_product.featured_image | img_url: '800x' }}{% else %}{{ section.settings.main_image_url }}{% endif %}"
+              style="display:none">
+              <source src="{{ section.settings.product_video_url }}" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalles del producto -->
+      <div class="product-details">
+        <div class="product-rating">
+          <div class="stars">★★★★★</div>
+          <span class="rating-count">{{ section.settings.review_count }}</span>
+        </div>
+
+        <h1 class="product-title">{{ current_product.title | default: section.settings.product_title }}</h1>
+
+        <div class="price-section">
+          {% if current_product != blank %}
+            {% if current_product.compare_at_price > current_product.price %}
+              <span class="price-original">{{ current_product.compare_at_price | money }}</span>
+              <div class="price-group">
+                <span class="price-current">{{ current_product.price | money }}</span>
+                {% assign discount = current_product.compare_at_price | minus: current_product.price | times: 100 | divided_by: current_product.compare_at_price %}
+                <span class="discount-badge">{{ discount }}% DE DESCUENTO</span>
+              </div>
+            {% else %}
+              <div class="price-group">
+                <span class="price-current">{{ current_product.price | money }}</span>
+              </div>
+            {% endif %}
+          {% else %}
+            <span class="price-original">{{ section.settings.price_original }}</span>
+            <div class="price-group">
+              <span class="price-current">{{ section.settings.price_current }}</span>
+              <span class="discount-badge">{{ section.settings.discount_badge }}</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <p class="product-description">
+          {{ current_product.description | default: section.settings.product_description | strip_html }}
+        </p>
+
+        <div class="product-includes">
+          <h3>Qué incluye:</h3>
+          <div class="includes-grid">
+            {% for block in section.blocks %}
+              {% if block.type == 'include_item' %}
+                <div class="include-item" {{ block.shopify_attributes }}>
+                  <span class="check-icon">✓</span>
+                  <div>
+                    <span>{{ block.settings.item_name }}</span>
+                    {% if block.settings.badge != blank %}
+                      <span class="free-badge">{{ block.settings.badge }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Opciones de pago -->
+        <div class="payment-options">
+          <div class="payment-option">
+            <label class="payment-label">
+              <input type="radio" name="payment" value="amazon">
+              <span class="radio-custom"></span>
+              <span>Pide por</span>
+              <span class="amazon-logo">amazon</span>
+            </label>
+          </div>
+          <div class="payment-option selected">
+            <label class="payment-label">
+              <input type="radio" name="payment" value="card" checked>
+              <span class="radio-custom"></span>
+              <span>Pagar ahora</span>
+              <div class="card-icons">
+                <span class="card-icon">VISA</span>
+                <span class="card-icon">MC</span>
+                <span class="card-icon">💳</span>
+                <span class="plus-more">+4</span>
+              </div>
+            </label>
+            <div class="payment-extra">
+              <a href="#" class="payment-link">PAGA CON TARJETA</a>
+              <span class="payment-text">y recibe los siguientes beneficios:</span>
+            </div>
+            <div class="extra-discount">
+              <label class="checkbox-label">
+                <input type="checkbox" checked>
+                <span class="checkbox-custom"></span>
+                <span>DESCUENTO</span>
+                <span class="discount-extra">10% EXTRA</span>
+              </label>
+            </div>
+          </div>
+          <div class="payment-option">
+            <label class="payment-label">
+              <input type="radio" name="payment" value="delivery">
+              <span class="radio-custom"></span>
+              <span>Paga contra entrega</span>
+              <a href="#" class="info-link">¿Cómo pago al recibir?</a>
+            </label>
+            <p class="payment-note">Si <strong>pago contra entrega</strong> no está disponible en tu destino, completa tu orden con <a href="#">Pagar Ahora</a></p>
+          </div>
+        </div>
+
+        <!-- Botón comprar -->
+        {% if current_product != blank %}
+          {% form 'product', current_product, id: 'BuyNowForm', novalidate: 'novalidate' %}
+            <input type="hidden" name="id" value="{{ current_product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="btn-buy-now" id="buyNowBtn">COMPRAR AHORA</button>
+          {% endform %}
+        {% else %}
+          <button class="btn-buy-now" type="button">COMPRAR AHORA</button>
+        {% endif %}
+
+        <!-- Info de envío -->
+        <div class="shipping-info">
+          <div class="info-item">
+            <div class="info-icon">🚚</div>
+            <div class="info-content">
+              <h4>Envío gratis para este artículo</h4>
+              <p>Entrega estimada de 3 a 7 días.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🔄</div>
+            <div class="info-content">
+              <h4>Cambios y devoluciones</h4>
+              <p>Te ofrecemos una garantía sin complicaciones.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🔒</div>
+            <div class="info-content">
+              <h4>Pagos Seguros</h4>
+              <p>Tu pago es 100% seguro. Tus datos están siempre protegidos.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="product-accordions">
+          {% for block in section.blocks %}
+            {% if block.type == 'faq_item' %}
+              <div class="accordion-item" {{ block.shopify_attributes }}>
+                <button class="accordion-header" type="button">
+                  <span>{{ block.settings.question }}</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-content">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <!-- Video feature -->
+        <div class="product-feature-section">
+          <div class="feature-image">
+            <video class="feature-video" src="{{ section.settings.feature_video_url }}" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="feature-content">
+            <h3>{{ section.settings.feature_title }}</h3>
+            <p>{{ section.settings.feature_desc }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const thumbsWrap = document.getElementById('productThumbs');
+      const mainImg = document.getElementById('productMainImg');
+      const mainVideo = document.getElementById('productMainVideo');
+      if (!thumbsWrap || !mainImg || !mainVideo) return;
+      mainVideo.muted = true; mainVideo.playsInline = true; mainVideo.controls = true; mainVideo.preload = 'auto';
+      function setActive(btn) { thumbsWrap.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active')); btn.classList.add('active'); }
+      function showImage(src) { try { mainVideo.pause(); mainVideo.currentTime = 0; } catch (e) {} mainVideo.style.display = 'none'; mainImg.style.display = 'block'; mainImg.src = src; }
+      function showVideo(src) { mainImg.style.display = 'none'; mainVideo.style.display = 'block'; const source = mainVideo.querySelector('source'); if (source && source.getAttribute('src') !== src) { source.setAttribute('src', src); mainVideo.load(); } setTimeout(() => { const p = mainVideo.play(); if (p) p.catch(() => {}); }, 100); }
+      thumbsWrap.addEventListener('click', function (e) { const btn = e.target.closest('.thumbnail'); if (!btn) return; e.preventDefault(); const type = btn.getAttribute('data-type') || 'image'; const src = btn.getAttribute('data-src'); if (!src) return; setActive(btn); if (type === 'video') { showVideo(src); } else { showImage(src); } });
+      const first = thumbsWrap.querySelector('.thumbnail.active') || thumbsWrap.querySelector('.thumbnail');
+      if (first) { const type = first.getAttribute('data-type') || 'image'; const src = first.getAttribute('data-src'); if (src) { if (type === 'video') showVideo(src); else showImage(src); } }
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Producto",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Handle del producto Shopify" },
+    { "type": "text", "id": "product_title", "label": "Título del producto (fallback)", "default": "Kit Vibro Sculpt Moldeado Completo" },
+    { "type": "textarea", "id": "product_description", "label": "Descripción (fallback)", "default": "Moldea tu cuerpo desde casa con tecnología de microvibraciones." },
+    { "type": "text", "id": "price_original", "label": "Precio original", "default": "$2,997" },
+    { "type": "text", "id": "price_current", "label": "Precio actual", "default": "$1,349" },
+    { "type": "text", "id": "discount_badge", "label": "Badge descuento", "default": "55% DE DESCUENTO" },
+    { "type": "text", "id": "review_count", "label": "Número de reseñas", "default": "372 reseñas" },
+    { "type": "text", "id": "main_image_url", "label": "URL imagen principal (fallback)", "default": "https://compravibrosculpt.com/cdn/shop/files/vibro-tech__image.png" },
+    { "type": "text", "id": "product_video_url", "label": "URL video del producto", "default": "https://cdn.shopify.com/videos/c/o/v/d06387b6919649beba4ea29da6772939.mp4" },
+    { "type": "text", "id": "feature_video_url", "label": "URL video de característica", "default": "https://cdn.shopify.com/videos/c/o/v/91ed471f90bc43bfbf14a44885e01232.mp4" },
+    { "type": "text", "id": "feature_title", "label": "Título sección feature", "default": "Reafirma y tonifica con facilidad" },
+    { "type": "textarea", "id": "feature_desc", "label": "Descripción sección feature", "default": "Elige la zona que quieres trabajar y masajea durante solo 15 minutos al día." }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Imagen de galería",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "image_url", "label": "URL de imagen (alternativa)" },
+        { "type": "select", "id": "media_type", "label": "Tipo", "options": [{ "value": "image", "label": "Imagen" }, { "value": "video", "label": "Video" }], "default": "image" }
+      ]
+    },
+    {
+      "type": "include_item",
+      "name": "Ítem incluido",
+      "settings": [
+        { "type": "text", "id": "item_name", "label": "Nombre del ítem" },
+        { "type": "text", "id": "badge", "label": "Badge (ej: GRATIS)" }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "Pregunta accordion",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Producto",
+    "blocks": [
+      { "type": "gallery_image", "settings": { "image_url": "https://compravibrosculpt.com/cdn/shop/files/vibro-tech__image.png", "media_type": "image" } },
+      { "type": "include_item", "settings": { "item_name": "Vibro Sculpt" } },
+      { "type": "include_item", "settings": { "item_name": "Cable de Corriente" } },
+      { "type": "include_item", "settings": { "item_name": "6 Almohadillas Moldeadoras" } },
+      { "type": "include_item", "settings": { "item_name": "Guía Plan Nutricional", "badge": "GRATIS" } },
+      { "type": "faq_item", "settings": { "question": "Envío rápido y seguro", "answer": "<p>Una vez despachado, lo recibirás en un plazo estimado de 2 a 7 días hábiles.</p>" } },
+      { "type": "faq_item", "settings": { "question": "Métodos de pago", "answer": "<p>Paga de forma fácil y segura al realizar tu pedido con tarjeta.</p>" } },
+      { "type": "faq_item", "settings": { "question": "Garantía sin complicaciones", "answer": "<p>Tu satisfacción es nuestra prioridad. Proceso rápido y sin enredos.</p>" } }
+    ]
+  }]
+}
+{% endschema %}

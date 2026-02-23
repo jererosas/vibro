@@ -1,0 +1,82 @@
+<footer class="site-footer" id="footer">
+  <div class="site-footer-wide">
+    <div class="site-footer-top">
+      <div class="footer-newsletter">
+        <h2 class="footer-news-title">{{ section.settings.newsletter_title }}</h2>
+        {% form 'customer' %}
+          {% if form.posted_successfully? %}
+            <p style="color: #88abcb;">¡Gracias por suscribirte!</p>
+          {% else %}
+            <div class="footer-news-form">
+              <input class="footer-news-input" type="email" name="contact[email]" placeholder="Email" aria-label="Email" required>
+              <button class="footer-news-submit" type="submit" aria-label="Enviar email"><span aria-hidden="true">→</span></button>
+            </div>
+            <input type="hidden" name="contact[tags]" value="newsletter">
+          {% endif %}
+          {% if form.errors %}
+            <p style="color: red;">{{ form.errors | default_errors }}</p>
+          {% endif %}
+        {% endform %}
+        <p class="footer-news-text">{{ section.settings.newsletter_text }}</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h3 class="footer-col-title">Inicio</h3>
+          <a class="footer-link" href="#inicio">Inicio</a>
+          <a class="footer-link" href="#producto">Vibro Sculpt</a>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Nosotros</h3>
+          <a class="footer-link" href="#">Nosotros</a>
+          <a class="footer-link" href="#">Contacto</a>
+          <div class="footer-social">
+            {% if section.settings.instagram_url != blank %}
+              <a class="footer-social-btn" href="{{ section.settings.instagram_url }}" aria-label="Instagram">◎</a>
+            {% endif %}
+            {% if section.settings.facebook_url != blank %}
+              <a class="footer-social-btn" href="{{ section.settings.facebook_url }}" aria-label="Facebook">f</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Ayuda</h3>
+          <a class="footer-link" href="#">Centro de ayuda</a>
+          <a class="footer-link" href="#">Guías de uso</a>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer-mid">
+      <div class="footer-brand">{{ section.settings.brand_name }}</div>
+      <nav class="footer-legal" aria-label="Legal">
+        <a class="footer-legal-link" href="#">Accesibilidad</a>
+        <a class="footer-legal-link" href="{{ routes.root_url }}policies/terms-of-service">Términos y Condiciones</a>
+        <a class="footer-legal-link" href="{{ routes.root_url }}policies/privacy-policy">Política de Privacidad</a>
+      </nav>
+    </div>
+    <p class="footer-disclaimer">{{ section.settings.disclaimer }}</p>
+    <p class="footer-copy">{{ section.settings.copyright }}</p>
+  </div>
+</footer>
+
+<div class="floating-actions" aria-label="Acciones flotantes">
+  <button class="fab fab-chat" type="button" aria-label="Abrir chat" id="fabChat">
+    <span class="fab-icon" aria-hidden="true">💬</span>
+    <span class="fab-badge" aria-hidden="true"></span>
+  </button>
+  <button class="fab fab-buy" type="button" aria-label="Comprar ahora" id="fabBuy">COMPRAR AHORA</button>
+</div>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Nombre de marca", "default": "VibroSculpt" },
+    { "type": "text", "id": "newsletter_title", "label": "Título newsletter", "default": "No te pierdas nada de Vibro Sculpt." },
+    { "type": "textarea", "id": "newsletter_text", "label": "Texto newsletter", "default": "Ingresa tu correo para recibir las mejores ofertas, consejos de fitness, bienestar y lanzamientos exclusivos." },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook URL" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer legal", "default": "*Los resultados pueden variar según cada persona. Este dispositivo no es un producto médico." },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2026 Vibro Sculpt" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+<section class="ratings-strip" id="calificaciones">
+  <div class="ratings-strip-wide">
+    <div class="ratings-strip-top">
+      <span class="ratings-strip-count">{{ section.settings.rating_count }}</span>
+      <span class="ratings-strip-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+      {% if section.settings.amazon_logo != blank %}
+        <img class="ratings-amz-logo" src="{{ section.settings.amazon_logo }}" alt="amazon" loading="lazy">
+      {% else %}
+        <img class="ratings-amz-logo" src="https://compravibrosculpt.com/cdn/shop/files/amazon_200x.svg?v=1767729717" alt="amazon" loading="lazy" onerror="this.style.display='none'">
+      {% endif %}
+    </div>
+    <div class="ratings-strip-viewport" id="ratingsViewport">
+      <div class="ratings-strip-track" id="ratingsTrack">
+        {% for block in section.blocks %}
+          <article class="ratings-item" {{ block.shopify_attributes }}>
+            <img class="ratings-logo" src="{{ block.settings.logo }}" alt="{{ block.settings.publication }}" loading="lazy" onerror="this.style.display='none'">
+            <p class="ratings-quote">{{ block.settings.quote }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Calificaciones",
+  "settings": [
+    { "type": "text", "id": "rating_count", "label": "Número de calificaciones", "default": "1,081 Calificaciones" },
+    { "type": "image_picker", "id": "amazon_logo", "label": "Logo Amazon" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Reseña de publicación",
+      "settings": [
+        { "type": "text", "id": "publication", "label": "Publicación" },
+        { "type": "text", "id": "logo", "label": "URL del logo" },
+        { "type": "textarea", "id": "quote", "label": "Cita" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Calificaciones",
+    "blocks": [
+      { "type": "review", "settings": { "publication": "marie claire", "logo": "https://compravibrosculpt.com/cdn/shop/files/marie_200x.svg?v=1767729717", "quote": "\"Sesiones de moldeado de 10 minutos que se adaptan fácil a tu rutina diaria.\"" } },
+      { "type": "review", "settings": { "publication": "COSMOPOLITAN", "logo": "https://compravibrosculpt.com/cdn/shop/files/cosmopo_200x.svg?v=1767729717", "quote": "\"Vibro Sculpt ayuda a mejorar visiblemente la firmeza y el aspecto de la piel desde casa, sin visitas a clínica.\"" } },
+      { "type": "review", "settings": { "publication": "VANITY FAIR", "logo": "https://compravibrosculpt.com/cdn/shop/files/vanity_200x.svg?v=1767729717", "quote": "\"Una nueva era para moldear el cuerpo: tecnología profesional, ahora desde casa.\"" } },
+      { "type": "review", "settings": { "publication": "allure", "logo": "https://compravibrosculpt.com/cdn/shop/files/allure_200x.svg?v=1767729717", "quote": "\"Triple tecnología para suavizar, reafirmar y esculpir el cuerpo en solo 10 minutos.\"" } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+<section class="technology-vibrobuff" id="tecnologia">
+  <div class="tech-wide-inner">
+    <div class="tech-layout">
+      <div class="tech-image-col">
+        <div class="tech-product-circle">
+          {% if section.settings.product_image != blank %}
+            <img class="tech-product-photo" src="{{ section.settings.product_image | img_url: '600x' }}" alt="{{ section.settings.title }}" loading="lazy" decoding="async">
+          {% else %}
+            <img class="tech-product-photo" src="{{ section.settings.product_image_url }}" alt="{{ section.settings.title }}" loading="lazy" decoding="async">
+          {% endif %}
+        </div>
+      </div>
+      <div class="tech-content-col">
+        <p class="tech-eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="tech-title">{{ section.settings.title }}</h2>
+        <p class="tech-description">{{ section.settings.description }}</p>
+        <div class="tech-benefits">
+          {% for block in section.blocks %}
+            <div class="tech-benefit" {{ block.shopify_attributes }}>
+              <div class="tech-benefit-icon">
+                {% if block.settings.icon_svg != blank %}
+                  {{ block.settings.icon_svg }}
+                {% endif %}
+              </div>
+              <span>{{ block.settings.label }}</span>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="tech-cta">
+          <button class="btn-tech-buy" type="button">{{ section.settings.cta_text }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tecnología VibroBuff",
+  "settings": [
+    { "type": "image_picker", "id": "product_image", "label": "Imagen del producto" },
+    { "type": "text", "id": "product_image_url", "label": "URL imagen (alternativa)", "default": "https://compravibrosculpt.com/cdn/shop/files/vibro-tech__image.png" },
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "TECNOLOGÍA AVANZADA" },
+    { "type": "text", "id": "title", "label": "Título", "default": "VIBROBUFF™" },
+    { "type": "textarea", "id": "description", "label": "Descripción", "default": "Nuestra tecnología VibroBuff, con más de 2,600 RPM, estimula la circulación y ayuda a romper los cúmulos de grasa localizada." },
+    { "type": "text", "id": "cta_text", "label": "Texto botón", "default": "COMPRAR AHORA" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        { "type": "html", "id": "icon_svg", "label": "Icono SVG" },
+        { "type": "text", "id": "label", "label": "Etiqueta" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Tecnología VibroBuff",
+    "blocks": [
+      { "type": "benefit", "settings": { "label": "Trabaja zonas difíciles" } },
+      { "type": "benefit", "settings": { "label": "Mejora la apariencia de la piel" } },
+      { "type": "benefit", "settings": { "label": "Ayuda a definir la figura" } },
+      { "type": "benefit", "settings": { "label": "Esculpe y tonifica el cuerpo" } },
+      { "type": "benefit", "settings": { "label": "Estimula la circulación" } },
+      { "type": "benefit", "settings": { "label": "Alivia dolores y tensiones musculares" } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,69 @@
+<section class="body-parts-carousel" id="zonas">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title }}</h2>
+    <div class="bp-carousel" aria-label="Carrusel de zonas del cuerpo">
+      <button class="bp-nav bp-prev" type="button" aria-label="Anterior"><span aria-hidden="true">‹</span></button>
+      <div class="bp-viewport" id="bpViewport" tabindex="0">
+        <div class="bp-track" id="bpTrack">
+          {% for block in section.blocks %}
+            <article class="bp-card" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.label }}" loading="lazy" decoding="async">
+              {% else %}
+                <img src="{{ block.settings.image_url }}" alt="{{ block.settings.label }}" loading="lazy" decoding="async">
+              {% endif %}
+              <div class="bp-label">{{ block.settings.label }}</div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+      <button class="bp-nav bp-next" type="button" aria-label="Siguiente"><span aria-hidden="true">›</span></button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const viewport = document.getElementById('bpViewport');
+      const track = document.getElementById('bpTrack');
+      const prev = document.querySelector('.bp-prev');
+      const next = document.querySelector('.bp-next');
+      if (!viewport || !track || !prev || !next) return;
+      const getStep = () => { const first = track.querySelector('.bp-card'); if (!first) return 320; const style = getComputedStyle(track); const gap = parseFloat(style.columnGap || style.gap || '0') || 0; return first.getBoundingClientRect().width + gap; };
+      const scrollByCards = (dir) => { viewport.scrollBy({ left: dir * getStep(), behavior: 'smooth' }); };
+      prev.addEventListener('click', () => scrollByCards(-1));
+      next.addEventListener('click', () => scrollByCards(1));
+      viewport.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') scrollByCards(-1); if (e.key === 'ArrowRight') scrollByCards(1); });
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Partes del cuerpo",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Trabaja cada parte del cuerpo" }
+  ],
+  "blocks": [
+    {
+      "type": "zone",
+      "name": "Zona corporal",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "image_url", "label": "URL imagen (alternativa)" },
+        { "type": "text", "id": "label", "label": "Etiqueta" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Partes del cuerpo",
+    "blocks": [
+      { "type": "zone", "settings": { "label": "Abdomen", "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_76491c8a-18d4-4902-a23d-7aca79e2ca0f.png" } },
+      { "type": "zone", "settings": { "label": "Glúteos", "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_8.png" } },
+      { "type": "zone", "settings": { "label": "Cintura", "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_4.png" } },
+      { "type": "zone", "settings": { "label": "Piernas", "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_5.png" } },
+      { "type": "zone", "settings": { "label": "Brazos", "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_2.png" } },
+      { "type": "zone", "settings": { "label": "Otras zonas", "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_6.png" } }
+    ]
+  }]
+}
+{% endschema %}

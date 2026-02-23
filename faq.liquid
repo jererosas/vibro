@@ -1,0 +1,84 @@
+<section class="faq-section" id="preguntas">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-col">
+        <div class="faq-head">
+          <h2 class="faq-title">{{ section.settings.title }}</h2>
+          <p class="faq-subtitle">{{ section.settings.subtitle }}</p>
+        </div>
+        <div class="faq-accordion" id="faqAccordion">
+          {% for block in section.blocks %}
+            {% if block.type == 'faq' %}
+              <div class="faq-item" {{ block.shopify_attributes }}>
+                <button class="faq-q" type="button" aria-expanded="false">
+                  <span>{{ block.settings.question }}</span>
+                  <span class="faq-plus" aria-hidden="true"></span>
+                </button>
+                <div class="faq-a" hidden>{{ block.settings.answer }}</div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <aside class="faq-side">
+        <div class="faq-side-card">
+          {% if section.settings.side_image != blank %}
+            <img class="faq-side-img" src="{{ section.settings.side_image | img_url: '600x' }}" alt="¿Tienes preguntas?" loading="lazy">
+          {% else %}
+            <img class="faq-side-img" src="{{ section.settings.side_image_url }}" alt="¿Tienes preguntas?" loading="lazy">
+          {% endif %}
+          <div class="faq-side-overlay">
+            <p class="faq-side-title">{{ section.settings.side_title }}</p>
+            <a class="faq-side-btn" href="{{ section.settings.side_link }}">{{ section.settings.side_cta }}</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const root = document.getElementById('faqAccordion');
+      if (!root) return;
+      const items = Array.from(root.querySelectorAll('.faq-item'));
+      const closeItem = (item) => { const btn = item.querySelector('.faq-q'); const panel = item.querySelector('.faq-a'); if (!btn || !panel) return; btn.setAttribute('aria-expanded', 'false'); panel.hidden = true; item.classList.remove('is-open'); };
+      const openItem = (item) => { const btn = item.querySelector('.faq-q'); const panel = item.querySelector('.faq-a'); if (!btn || !panel) return; btn.setAttribute('aria-expanded', 'true'); panel.hidden = false; item.classList.add('is-open'); };
+      root.addEventListener('click', (e) => { const btn = e.target.closest('.faq-q'); if (!btn) return; const item = btn.closest('.faq-item'); if (!item) return; const isOpen = btn.getAttribute('aria-expanded') === 'true'; items.forEach(closeItem); if (!isOpen) openItem(item); });
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Preguntas frecuentes" },
+    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Aquí encontrarás todo lo que necesitas saber." },
+    { "type": "image_picker", "id": "side_image", "label": "Imagen lateral" },
+    { "type": "text", "id": "side_image_url", "label": "URL imagen lateral", "default": "https://compravibrosculpt.com/cdn/shop/files/Have_Questions.png" },
+    { "type": "text", "id": "side_title", "label": "Título card lateral", "default": "¿Tienes preguntas?" },
+    { "type": "text", "id": "side_cta", "label": "Texto botón lateral", "default": "Contacta a nuestro equipo" },
+    { "type": "url", "id": "side_link", "label": "Enlace del botón lateral" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Preguntas frecuentes",
+    "blocks": [
+      { "type": "faq", "settings": { "question": "¿Qué áreas del cuerpo trata?", "answer": "<p>Vibro Sculpt se enfoca en el abdomen, cintura, espalda, glúteos, muslos brazos y áreas con grasa persistente.</p>" } },
+      { "type": "faq", "settings": { "question": "¿Es seguro de usar?", "answer": "<p>Sí, Vibro Sculpt está diseñado pensando en tu seguridad.</p>" } },
+      { "type": "faq", "settings": { "question": "¿Con qué frecuencia debo usarlo?", "answer": "<p>Úsalo según tus objetivos. Incluirlo regularmente en tu rutina ofrece los mejores resultados.</p>" } },
+      { "type": "faq", "settings": { "question": "¿Es adecuado para todos los tipos de piel?", "answer": "<p>Sí, es adecuado para la mayoría de tipos de piel.</p>" } },
+      { "type": "faq", "settings": { "question": "¿Requiere mantenimiento o limpieza?", "answer": "<p>Sí, debes limpiarlo y mantenerlo adecuadamente para asegurar su buen funcionamiento.</p>" } }
+    ]
+  }]
+}
+{% endschema %}

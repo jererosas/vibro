@@ -1,0 +1,78 @@
+<section class="results-proven" id="resultados-comprobados">
+  <div class="container">
+    <div class="results-card">
+      <div class="results-image">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | img_url: '600x' }}" alt="VibroSculpt - Resultados comprobados" loading="lazy" decoding="async">
+        {% else %}
+          <img src="{{ section.settings.image_url }}" alt="VibroSculpt - Resultados comprobados" loading="lazy" decoding="async">
+        {% endif %}
+      </div>
+      <div class="results-content">
+        <h2 class="results-title">{{ section.settings.title }}</h2>
+        <div class="results-list">
+          {% for block in section.blocks %}
+            <div class="result-item" data-percent="{{ block.settings.percent }}" {{ block.shopify_attributes }}>
+              <div class="result-ring" aria-label="{{ block.settings.percent }} por ciento">
+                <svg viewBox="0 0 44 44" class="ring" aria-hidden="true">
+                  <circle class="ring-bg" cx="22" cy="22" r="18"></circle>
+                  <circle class="ring-fg" cx="22" cy="22" r="18"></circle>
+                </svg>
+                <span class="result-percent">{{ block.settings.percent }}%</span>
+              </div>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          {% endfor %}
+        </div>
+        <p class="results-note">{{ section.settings.footnote }}</p>
+      </div>
+    </div>
+    <div class="results-cta">
+      <button class="btn-results-buy" type="button">{{ section.settings.cta_text }}</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.results-proven .result-item').forEach((item) => {
+        const p = Math.max(0, Math.min(100, parseInt(item.getAttribute('data-percent') || '0', 10)));
+        const fg = item.querySelector('.ring-fg');
+        if (!fg) return;
+        const r = 18; const c = 2 * Math.PI * r;
+        fg.style.strokeDasharray = `${c}`;
+        fg.style.strokeDashoffset = `${c * (1 - (p / 100))}`;
+      });
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Resultados comprobados",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "image_url", "label": "URL imagen (alternativa)", "default": "https://compravibrosculpt.com/cdn/shop/files/VS_VibroSculpt_Bank.png" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Resultados comprobados" },
+    { "type": "text", "id": "footnote", "label": "Nota al pie", "default": "**Basado en un estudio realizado con 52 participantes." },
+    { "type": "text", "id": "cta_text", "label": "Texto botón", "default": "COMPRAR AHORA" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Estadística",
+      "settings": [
+        { "type": "number", "id": "percent", "label": "Porcentaje", "default": 93 },
+        { "type": "textarea", "id": "description", "label": "Descripción" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Resultados comprobados",
+    "blocks": [
+      { "type": "stat", "settings": { "percent": 93, "description": "Observaron un mayor volumen y definición en sus glúteos." } },
+      { "type": "stat", "settings": { "percent": 94, "description": "De los usuarios notaron su cuerpo más firme tras comenzar a usarlo." } },
+      { "type": "stat", "settings": { "percent": 91, "description": "Reportaron una piel más suave y una reducción en la apariencia de celulitis." } }
+    ]
+  }]
+}
+{% endschema %}

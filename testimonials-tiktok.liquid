@@ -1,0 +1,104 @@
+<section class="testimonials-section" id="testimonios">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title }}</h2>
+  </div>
+  <div class="tiktok-section-inner">
+    <div class="tiktok-slider-wrapper">
+      <div class="tiktok-slider" id="tiktokSlider">
+        {% for block in section.blocks %}
+          <div class="tiktok-card" data-video="{{ block.settings.video_url }}" {{ block.shopify_attributes }}>
+            <video class="tiktok-video" playsinline preload="metadata" muted loop></video>
+            <div class="tiktok-subtitle">
+              {% assign lines = block.settings.subtitle | newline_to_br | split: '<br />' %}
+              {% for line in lines %}
+                <span>{{ line }}</span>
+              {% endfor %}
+            </div>
+            <div class="tiktok-bar">
+              <div class="tiktok-user">
+                <div class="tiktok-avatar" aria-hidden="true">▶</div>
+                <span>{{ block.settings.username }}</span>
+              </div>
+              <button class="tiktok-mute" type="button" aria-label="Activar/Desactivar sonido" aria-pressed="false">
+                <span class="mute-icon" aria-hidden="true">🔇</span>
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="tiktok-dots" id="tiktokDots" aria-label="Paginación de testimonios">
+      {% for block in section.blocks %}
+        <button class="tiktok-dot {% if forloop.first %}active{% endif %}" data-page="{{ forloop.index0 }}" aria-label="Página {{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
+    <div class="tiktok-cta">
+      <button class="btn-buy-tiktok" type="button">{{ section.settings.cta_text }}</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slider = document.getElementById('tiktokSlider');
+      if (!slider) return;
+      const cards = Array.from(slider.querySelectorAll('.tiktok-card'));
+      cards.forEach((card) => {
+        const video = card.querySelector('.tiktok-video');
+        const src = card.getAttribute('data-video');
+        if (!video || !src) return;
+        video.src = src; video.muted = true; video.loop = true; video.playsInline = true; video.preload = 'metadata'; video.load();
+      });
+      slider.addEventListener('click', (e) => {
+        if (e.target.closest('.tiktok-mute')) return;
+        const card = e.target.closest('.tiktok-card');
+        const video = card?.querySelector('.tiktok-video');
+        if (!card || !video) return;
+        if (video.paused) { const p = video.play(); if (p && typeof p.catch === 'function') p.catch(() => {}); } else { video.pause(); }
+      }, true);
+      slider.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tiktok-mute');
+        if (!btn) return;
+        const card = btn.closest('.tiktok-card');
+        const video = card?.querySelector('.tiktok-video');
+        if (!card || !video) return;
+        const willUnmute = video.muted;
+        if (willUnmute) { cards.forEach((c) => { const v = c.querySelector('.tiktok-video'); const b = c.querySelector('.tiktok-mute'); const i = b?.querySelector('.mute-icon'); if (!v || !b || !i) return; v.muted = true; b.setAttribute('aria-pressed', 'false'); i.textContent = '🔇'; }); }
+        video.muted = !willUnmute;
+        btn.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
+        const icon = btn.querySelector('.mute-icon');
+        if (icon) icon.textContent = video.muted ? '🔇' : '🔊';
+        if (!video.muted && video.paused) { const p = video.play(); if (p && typeof p.catch === 'function') p.catch(() => {}); }
+      }, true);
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonios TikTok",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Historias reales, resultados reales" },
+    { "type": "text", "id": "cta_text", "label": "Texto botón", "default": "COMPRAR AHORA" }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video testimonio",
+      "settings": [
+        { "type": "text", "id": "video_url", "label": "URL del video" },
+        { "type": "textarea", "id": "subtitle", "label": "Subtítulo (una línea por renglón)" },
+        { "type": "text", "id": "username", "label": "Usuario", "default": "vibrosculpt" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Testimonios TikTok",
+    "blocks": [
+      { "type": "video", "settings": { "video_url": "https://cdn.shopify.com/videos/c/o/v/2fa041aed8124ff3b2a972cadde1a19c.mp4", "subtitle": "relaja y suaviza\nla superficie de la piel" } },
+      { "type": "video", "settings": { "video_url": "https://cdn.shopify.com/videos/c/o/v/86c879a4c21842a3807f9546d6002872.mp4", "subtitle": "Y prueben Vibro Sculpt.\nA mí me encanta" } },
+      { "type": "video", "settings": { "video_url": "https://cdn.shopify.com/videos/c/o/v/f92275cafb424c768f8510663170c439.mp4", "subtitle": "Y tonificado que nunca" } },
+      { "type": "video", "settings": { "video_url": "https://cdn.shopify.com/videos/c/o/v/364ac2dcb6704538b8c7f4a818ffd54a.mp4", "subtitle": "Hacia los lados" } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+<section class="cart-page" style="padding: 40px 20px;">
+  <div class="container" style="max-width: 900px; margin: 0 auto;">
+    <h1 style="margin-bottom: 16px;">Carrito</h1>
+
+    {% if cart.item_count == 0 %}
+      <p>Tu carrito está vacío.</p>
+      <p><a href="{{ routes.root_url }}">Volver a la tienda</a></p>
+    {% else %}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <div style="display: grid; gap: 12px; margin: 24px 0;">
+          {% for item in cart.items %}
+            <div style="display:flex; gap:12px; align-items:center; border:1px solid #eee; padding:12px; border-radius:10px;">
+              {% if item.image %}
+                <img src="{{ item.image | img_url: '120x' }}" alt="{{ item.product.title | escape }}" width="80" height="80" style="object-fit:cover; border-radius:10px;">
+              {% endif %}
+
+              <div style="flex:1;">
+                <div style="font-weight:600;">{{ item.product.title }}</div>
+                <div style="opacity:.8;">{{ item.final_price | money }}</div>
+              </div>
+
+              <div>
+                <label style="display:block; font-size:12px; opacity:.7;">Cantidad</label>
+                <input
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  style="width:80px; padding:8px;"
+                >
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; gap: 12px;">
+          <div style="font-size: 18px;">
+            <strong>Total:</strong> {{ cart.total_price | money }}
+          </div>
+
+          <div style="display:flex; gap: 10px;">
+            <button type="submit" name="update" style="padding:10px 14px;">Actualizar</button>
+            <button type="submit" name="checkout" style="padding:10px 14px;">Ir a pagar</button>
+          </div>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

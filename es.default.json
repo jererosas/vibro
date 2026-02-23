@@ -1,0 +1,6 @@
+{
+  "general": {
+    "pagination": { "previous": "Anterior", "next": "Siguiente" },
+    "password_page": { "login_form_heading": "Entrar con contraseña" }
+  }
+}

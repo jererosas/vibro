@@ -1,0 +1,61 @@
+<section class="microvibro-section" id="microvibraciones">
+  <div class="container">
+    <h2 class="microvibro-title">{{ section.settings.title }}</h2>
+    <p class="microvibro-subtitle">{{ section.settings.subtitle }}</p>
+    <div class="microvibro-card">
+      <div class="microvibro-media">
+        <video class="microvibro-video" src="{{ section.settings.video_url }}" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+      <div class="microvibro-benefits">
+        {% for block in section.blocks %}
+          <div class="microvibro-benefit" {{ block.shopify_attributes }}>
+            <div class="microvibro-icon">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | img_url: '100x' }}" alt="" loading="lazy" decoding="async">
+              {% elsif block.settings.image_url != blank %}
+                <img src="{{ block.settings.image_url }}" alt="" loading="lazy" decoding="async">
+              {% endif %}
+            </div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="microvibro-cta">
+      <button class="btn-microvibro-buy" type="button">{{ section.settings.cta_text }}</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Microvibraciones",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Tecnología VibroBuff con microvibraciones" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Tonifica, moldea y activa tu circulación en cada sesión." },
+    { "type": "text", "id": "video_url", "label": "URL del video", "default": "https://cdn.shopify.com/videos/c/o/v/b97308a72c8343559ff6d982d6f57b82.mp4" },
+    { "type": "text", "id": "cta_text", "label": "Texto botón", "default": "COMPRAR AHORA" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen icono" },
+        { "type": "text", "id": "image_url", "label": "URL imagen (alternativa)" },
+        { "type": "text", "id": "title", "label": "Título" },
+        { "type": "textarea", "id": "description", "label": "Descripción" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Microvibraciones",
+    "blocks": [
+      { "type": "benefit", "settings": { "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_76491c8a-18d4-4902-a23d-7aca79e2ca0f.png", "title": "VIBROBUFF™", "description": "Activa contracciones musculares continuas para reafirmar y tonificar." } },
+      { "type": "benefit", "settings": { "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_4.png", "title": "ONDAS DE MICROVIBRACIÓN", "description": "Descompone los depósitos de grasa bajo la piel mientras mejora la elasticidad." } },
+      { "type": "benefit", "settings": { "image_url": "https://compravibrosculpt.com/cdn/shop/files/image_2.png", "title": "ONDAS DE MICROCOMPRESIÓN", "description": "Estimula el sistema linfático para eliminar toxinas y desechos del cuerpo." } }
+    ]
+  }]
+}
+{% endschema %}
