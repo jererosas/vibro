@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre Nosotros | Vibro Sculpt (Replica)</title>
+
+  <!-- Swiper (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <link rel="stylesheet" href="./styles_nosotros.css" />
+</head>
+
+<body>
+  <!-- TOP BANNER -->
+  <div class="top-banner top-banner-cl swiper" id="topBanner" aria-label="Top banner">
+    <div class="top-banner__wrapper swiper-wrapper">
+      <p class="top-banner__slide swiper-slide">GARANTÍA DE SATISFACCIÓN</p>
+      <p class="top-banner__slide swiper-slide">SOPORTE 24/7</p>
+    </div>
+
+    <div class="top-banner__arrow swiper-button-prev" aria-label="Anterior"></div>
+    <div class="top-banner__arrow swiper-button-next" aria-label="Siguiente"></div>
+  </div>
+
+  <!-- HEADER + MOBILE DRAWER -->
+  <div class="header_container" id="headerContainer">
+    <header class="header" id="siteHeader">
+      <div class="header_action_btns is-hidden-tablet">
+        <button class="header_menu-btn" id="openMenuBtn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <a class="header_logo_container" href="#" aria-label="Logo">
+        <img
+          class="header_logo_img"
+          src="https://cdn.shopify.com/s/files/1/0299/7698/5659/files/vibrosculpt-logo.png?v=1664470171"
+          alt="Vibro Sculpt"
+          loading="eager"
+        />
+      </a>
+
+      <ul class="header_menu_desk is-hidden-mobile" aria-label="Menú principal">
+        <li><a href="#">INICIO</a></li>
+        <li><a href="#">VIBRO SCULPT</a></li>
+        <li><a class="is-current" href="#">NOSOTROS</a></li>
+      </ul>
+
+      <div class="header_cart-btn_container">
+        <a class="header_cart-btn" href="#" aria-label="Carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 8.5C6 7.94772 6.44772 7.5 7 7.5H10C10.4936 7.5 10.9133 7.86011 10.9884 8.34794L11.4733 11.5H27C27.3125 11.5 27.607 11.6461 27.7961 11.8949C27.9852 12.1437 28.0472 12.4665 27.9635 12.7676L25.4635 21.7676C25.3433 22.2005 24.9492 22.5 24.5 22.5H12C11.5064 22.5 11.0867 22.1399 11.0116 21.6521L9.14208 9.5H7C6.44772 9.5 6 9.05228 6 8.5ZM11.781 13.5L12.8579 20.5H23.7399L25.6844 13.5H11.781Z" fill="#2A63FF"></path>
+            <path d="M16 26C16 27.1046 15.1046 28 14 28C12.8954 28 12 27.1046 12 26C12 24.8954 12.8954 24 14 24C15.1046 24 16 24.8954 16 26Z" fill="#2A63FF"></path>
+            <path d="M25 26C25 27.1046 24.1046 28 23 28C21.8954 28 21 27.1046 21 26C21 24.8954 21.8954 24 23 24C24.1046 24 25 24.8954 25 26Z" fill="#2A63FF"></path>
+            <circle cx="26" cy="13" r="6" fill="#C40064"></circle>
+          </svg>
+          <span class="cart_count" data-cart-count>1</span>
+        </a>
+      </div>
+    </header>
+
+    <nav class="header_menu" id="mobileMenu" aria-label="Menú móvil">
+      <div class="header_menu_top">
+        <header class="menu_close_container">
+          <button class="menu_close" id="closeMenuBtn" aria-label="Cerrar menú">
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+
+        <button class="menu_product_link" id="menuProductBtn" type="button">
+          <article class="menu_product">
+            <figure class="menu_product_media">
+              <img
+                class="responsive-img"
+                src="https://compravibrosculpt.com/cdn/shop/files/VS_Image_bundle_colombia_1.avif?v=1757358564&width=400"
+                alt="Kit Vibro Sculpt Moldeado Completo"
+                loading="lazy"
+                width="100"
+                height="100"
+              />
+            </figure>
+            <div class="menu_product_description">
+              <div class="menu_product_stars" aria-hidden="true">★★★★★</div>
+              <h2>Vibro Sculpt™</h2>
+              <div class="menu_product_prices">
+                <p>$ 1,349.00</p>
+              </div>
+              <p class="button">
+                COMPRA AHORA
+                <span class="chev" aria-hidden="true">›</span>
+              </p>
+            </div>
+          </article>
+        </button>
+      </div>
+
+      <div class="header_menu_bottom">
+        <ul class="menu_links">
+          <li><a href="#">INICIO <span aria-hidden="true">›</span></a></li>
+          <li><a href="#">VIBRO SCULPT <span aria-hidden="true">›</span></a></li>
+          <li><a href="#">NOSOTROS <span aria-hidden="true">›</span></a></li>
+        </ul>
+
+        <hr>
+
+        <ul class="menu_company">
+          <li class="menu_company_title">AYUDA</li>
+          <li><a href="#">Contáctanos</a></li>
+          <li><a href="https://help.compravibrosculpt.com/en-US" target="_blank" rel="noreferrer">Centro de Ayuda</a></li>
+        </ul>
+
+        <footer class="menu_footer">
+          <section class="menu_footer_content">
+            <h2>© 2026 Vibro Sculpt.</h2>
+            <div class="menu_footer_social">
+              <a href="https://www.instagram.com/vibrosculptlatam" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/vibrosculptlatam" target="_blank" rel="noreferrer">Facebook</a>
+            </div>
+          </section>
+        </footer>
+      </div>
+    </nav>
+
+    <div class="menu_overlay" id="menuOverlay" aria-hidden="true"></div>
+  </div>
+
+  <main>
+    <!-- Banner imagen -->
+    <section class="custom__banner custom__banner--blue">
+      <div class="full-width-and-full-height">
+        <picture class="image banner__element is-hidden-mobile" id="bannerElement1">
+          <img src="https://compravibrosculpt.com/cdn/shop/files/banner-about-us.jpg?v=1758835910" alt="Vibro Sculpt LATAM" loading="eager">
+        </picture>
+
+        <picture class="image banner__element is-hidden-tablet">
+          <img src="https://compravibrosculpt.com/cdn/shop/files/banner-about-us.jpg?v=1758835910" alt="Vibro Sculpt LATAM" loading="eager">
+        </picture>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="aboutIntro">
+      <h1>Sobre Nosotros</h1>
+      <p>
+        Estamos aquí para ofrecerle un método seguro, práctico y eficaz para masajear todo el cuerpo.
+        Por eso hemos desarrollado nuestro masajeador corporal como parte de una rutina de belleza completa
+        para mujeres de todas las edades. Nuestro masajeador Vibro Sculpt ofrece una solución de belleza
+        natural y altamente eficaz desde la comodidad de su propio hogar.
+      </p>
+    </section>
+
+    <!-- Image Text: Innovación -->
+    <section class="image-text image-text--right">
+      <img
+        loading="lazy"
+        class="is-hidden-tablet image-text__image image-text__image--right"
+        src="https://compravibrosculpt.com/cdn/shop/files/IMG.jpg?v=1758838191&width=600"
+        alt="Image mobile - Innovación"
+        width="390"
+        height="386"
+      />
+      <img
+        loading="lazy"
+        class="is-hidden-mobile image-text__image image-text__image--right"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment.jpg?v=1758838191&width=1400"
+        alt="Image desktop - Innovación"
+        width="720"
+        height="386"
+      />
+
+      <div class="image-text__container">
+        <div class="image-text__content">
+          <h2 class="image-text__title">Innovación</h2>
+          <p class="image-text__description">
+            Lideramos la innovación en tecnología de moldeado corporal, brindando soluciones que ofrecen resultados visibles y de largo plazo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Text: Calidad -->
+    <section class="image-text image-text--left">
+      <img
+        loading="lazy"
+        class="is-hidden-tablet image-text__image"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment_2.jpg?v=1758838191&width=600"
+        alt="Image mobile - Calidad"
+        width="390"
+        height="386"
+      />
+      <img
+        loading="lazy"
+        class="is-hidden-mobile image-text__image"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment_1.jpg?v=1758838191&width=1400"
+        alt="Image desktop - Calidad"
+        width="720"
+        height="386"
+      />
+
+      <div class="image-text__container">
+        <div class="image-text__content">
+          <h2 class="image-text__title">Calidad</h2>
+          <p class="image-text__description">
+            Diseñamos nuestros productos con los más altos estándares de calidad, comodidad y durabilidad para satisfacer todas tus necesidades.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destacado en (Swiper) -->
+    <section class="brands-info" aria-label="Destacado en">
+      <h2>Destacado en</h2>
+
+      <article class="brands-info_container">
+        <div class="brands-info_swiper swiper" id="brandsSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://compravibrosculpt.com/cdn/shop/files/ELLE_200x.svg?v=1732211505" alt="ELLE" width="240" height="40">
+              <p>"Tecnología para moldear tu cuerpo, ahora desde casa."</p>
+            </div>
+            <div class="swiper-slide">
+              <img src="https://compravibrosculpt.com/cdn/shop/files/Forbes_200x.svg?v=1732211505" alt="Forbes" width="240" height="40">
+              <p>"Vibro Sculpt, la forma fácil de tonificar tu cuerpo y ver resultados."</p>
+            </div>
+            <div class="swiper-slide">
+              <img src="https://compravibrosculpt.com/cdn/shop/files/Glamour_200x.svg?v=1749137179" alt="Glamour" width="240" height="40">
+              <p>"Resultados de spa, desde la comodidad de tu hogar."</p>
+            </div>
+            <div class="swiper-slide brands-info_slide_large">
+              <img src="https://compravibrosculpt.com/cdn/shop/files/New_York_Weekly_200x.svg?v=1732211505" alt="New York Weekly" width="240" height="40">
+              <p>"Tonifica tu cuerpo desde casa con Vibro Sculpt - resultados profesionales en cualquier momento"</p>
+            </div>
+            <div class="swiper-slide">
+              <img src="https://compravibrosculpt.com/cdn/shop/files/US_Reporter_200x.svg?v=1732211505" alt="US Reporter" width="240" height="40">
+              <p>"Moldea tu cuerpo sin esfuerzo, resultados profesionales."</p>
+            </div>
+          </div>
+
+          <button class="brands-info_swiper_nav_cta swiper-button-prev" aria-label="Anterior">
+            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none" aria-hidden="true">
+              <path d="M27.5469 33.5938L15.4531 21.5L27.5469 9.40625" stroke="#5B7793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <button class="brands-info_swiper_nav_cta swiper-button-next" aria-label="Siguiente">
+            <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none" aria-hidden="true">
+              <path d="M15.4531 9.40625L27.5469 21.5L15.4531 33.5938" stroke="#5B7793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Banner Video -->
+    <section class="custom__banner custom__banner--white">
+      <div class="video__container">
+        <video
+          class="responsive-video"
+          autoplay
+          loop
+          playsinline
+          muted
+          preload="metadata"
+          src="https://cdn.shopify.com/videos/c/o/v/491fde043746403fb8abe642cf833b17.mp4"
+        ></video>
+      </div>
+    </section>
+
+    <!-- Image Text: Empoderamiento -->
+    <section class="image-text image-text--right">
+      <img
+        loading="lazy"
+        class="is-hidden-tablet image-text__image image-text__image--right"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment_4.jpg?v=1758838191&width=600"
+        alt="Image mobile - Empoderamiento"
+        width="390"
+        height="386"
+      />
+      <img
+        loading="lazy"
+        class="is-hidden-mobile image-text__image image-text__image--right"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment_3.jpg?v=1758838191&width=1400"
+        alt="Image desktop - Empoderamiento"
+        width="720"
+        height="386"
+      />
+
+      <div class="image-text__container">
+        <div class="image-text__content">
+          <h2 class="image-text__title">Empoderamiento</h2>
+          <p class="image-text__description">
+            Con soluciones personalizadas y apoyo constante, buscamos empoderar a cada mujer para redefinir su confianza.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Text: Inclusión -->
+    <section class="image-text image-text--left">
+      <img
+        loading="lazy"
+        class="is-hidden-tablet image-text__image"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment_8.jpg?v=1758838449&width=600"
+        alt="Image mobile - Inclusión"
+        width="390"
+        height="386"
+      />
+      <img
+        loading="lazy"
+        class="is-hidden-mobile image-text__image"
+        src="https://compravibrosculpt.com/cdn/shop/files/Empowerment_7.jpg?v=1758838339&width=1400"
+        alt="Image desktop - Inclusión"
+        width="720"
+        height="386"
+      />
+
+      <div class="image-text__container">
+        <div class="image-text__content">
+          <h2 class="image-text__title">Inclusión</h2>
+          <p class="image-text__description">
+            La belleza y la confianza son universales. Celebramos todos los tipos de piel, cuerpos y metas, promoviendo la diversidad en cada paso.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTADOS (como screenshot: izquierda texto+logos, derecha imagen) -->
+    <section class="resultsSplit" aria-label="Resultados confiables">
+      <div class="resultsSplit__left">
+        <div class="resultsSplit__badge" aria-hidden="true">✓</div>
+
+        <h3 class="resultsSplit__title">Resultados confiables</h3>
+        <p class="resultsSplit__subtitle">Tu solución todo en uno para un moldeado garantizado</p>
+
+        <div class="resultsSplit__logos" aria-label="Medios destacados">
+          <img
+            src="https://compravibrosculpt.com/cdn/shop/files/ELLE_200x.svg?v=1732211505"
+            alt="ELLE"
+            loading="lazy"
+            width="120"
+            height="28"
+          />
+          <img
+            src="https://compravibrosculpt.com/cdn/shop/files/Forbes_200x.svg?v=1732211505"
+            alt="Forbes"
+            loading="lazy"
+            width="120"
+            height="28"
+          />
+          <img
+            src="https://compravibrosculpt.com/cdn/shop/files/Glamour_200x.svg?v=1749137179"
+            alt="Glamour"
+            loading="lazy"
+            width="120"
+            height="28"
+          />
+          <img
+            src="https://compravibrosculpt.com/cdn/shop/files/New_York_Weekly_200x.svg?v=1732211505"
+            alt="New York Weekly"
+            loading="lazy"
+            width="160"
+            height="28"
+          />
+          <img
+            src="https://compravibrosculpt.com/cdn/shop/files/US_Reporter_200x.svg?v=1732211505"
+            alt="US Reporter"
+            loading="lazy"
+            width="140"
+            height="28"
+          />
+        </div>
+      </div>
+
+      <div class="resultsSplit__right" aria-hidden="true">
+        <img
+          class="resultsSplit__image"
+          src="https://compravibrosculpt.com/cdn/shop/files/treus.jpg"
+          alt=""
+          loading="lazy"
+        />
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <section class="footer__nav">
+        <form id="newsletter-footer" class="footer_form">
+          <h2>No te pierdas nada de <br> Vibro Sculpt.</h2>
+
+          <div class="footer_form_row">
+            <input type="email" class="email-addresss-footer" name="email" placeholder="Email" required>
+            <button aria-label="Subscribe" type="submit" class="footer_submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12H19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12 5L19 12L12 19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+
+          <p class="footer_form_help">
+            Ingresa tu correo para recibir las mejores ofertas, consejos de fitness, bienestar y lanzamientos exclusivos.
+          </p>
+
+          <p class="footer_form_success" id="newsletterSuccess" hidden>¡Gracias por suscribirte!</p>
+        </form>
+
+        <div class="footer__nav__links">
+          <div class="footer__nav__links__menus">
+            <div>
+              <h4>Inicio</h4>
+              <a href="#">Vibro Sculpt</a>
+              <a href="https://vibrosculpt.com/" target="_blank" rel="noreferrer">Vibro Sculpt US</a>
+            </div>
+
+            <div>
+              <h4>Nosotros</h4>
+              <a href="#">Nosotros</a>
+              <a href="#">Contacto</a>
+            </div>
+
+            <div>
+              <h4>Ayuda</h4>
+              <a href="https://help.compravibrosculpt.com/en-US" target="_blank" rel="noreferrer">Centro de ayuda</a>
+              <a href="#">Guías de uso</a>
+            </div>
+          </div>
+
+          <div class="footer__nav__social">
+            <a href="https://www.instagram.com/vibrosculptlatam" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.facebook.com/vibrosculptlatam/" target="_blank" rel="noreferrer">Facebook</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="footer__legal">
+        <div class="footer__legal__menu">
+          <a href="#" class="footerBrand">Vibro Sculpt</a>
+          <a href="#">Accesibilidad</a>
+          <a href="#">Términos y Condiciones</a>
+          <a href="#">Política de Privacidad</a>
+        </div>
+
+        <div class="footer__legal__copyright">
+          <p>
+            *Los resultados pueden variar según cada persona. La mayoría experimentará mejoras graduales.
+            Los usuarios de Vibro Sculpt complementaron su uso con un plan de alimentación y ejercicio regular.
+            <br>
+            Este dispositivo no es un producto médico y no está diseñado para tratar o diagnosticar enfermedades.
+          </p>
+          <p>© 2026 Vibro Sculpt</p>
+        </div>
+      </section>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js_nosotros.js"></script>
+</body>
+</html>

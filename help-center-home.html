@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help Center - Vibro Sculpt</title>
+  <style>
+    :root{
+      --text:#161616;
+      --muted:#6a6a6a;
+      --line:#e6e6e6;
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 10px;
+      --sidebarW: 280px;
+      --contentW: 860px;
+      --maxW: 1220px;
+      --accent:#111;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* Header */
+    .hc-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+    }
+    .hc-header__inner{
+      height:72px;
+      max-width:var(--maxW);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 18px;
+    }
+    .hc-logo{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .hc-logo img{
+      height:32px;
+      width:auto;
+      display:block;
+    }
+
+    /* Hero */
+    .hc-hero{
+      position:relative;
+      height:260px;
+      overflow:hidden;
+      border-bottom:1px solid var(--line);
+      background:#f6f6f6;
+    }
+    .hc-hero__bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(0deg, rgba(0,0,0,.25), rgba(0,0,0,.25)),
+        url("https://attachments.gorgias.help/VvEzB7NZXm7beky0/hc/bgJ1Q6QoVA7vXKOM/2025011019-9f7a3e05-4436-44a4-9d4a-9c6211f99c3a-vs_help_banner_july_2022_3.png");
+      background-size:cover;
+      background-position:center 50%;
+      transform:scale(1.02);
+      filter:saturate(1.05);
+    }
+    .hc-hero__inner{
+      position:relative;
+      max-width:var(--maxW);
+      margin:0 auto;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      padding:0 18px;
+      text-align:center;
+      color:#fff;
+    }
+    .hc-hero h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:.5px;
+      font-weight:700;
+      text-transform:uppercase;
+    }
+    .hc-search{
+      width:min(520px, 100%);
+      background:#fff;
+      border-radius:6px;
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      padding:10px 12px;
+      gap:10px;
+      color:var(--text);
+    }
+    .hc-search svg{flex:0 0 auto}
+    .hc-search input{
+      border:0;
+      outline:0;
+      width:100%;
+      font-size:14px;
+    }
+    .hc-search button{
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      color:var(--muted);
+      font-size:14px;
+      padding:6px 8px;
+    }
+
+    /* Layout */
+    .hc-main{
+      max-width:var(--maxW);
+      margin:0 auto;
+      padding:36px 18px 64px;
+    }
+
+    .hc-title{
+      margin:0 0 22px;
+      font-size:30px;
+      font-weight:800;
+    }
+
+    .hc-grid{
+      display:grid;
+      grid-template-columns: var(--sidebarW) minmax(0, 1fr);
+      gap:42px;
+      align-items:start;
+    }
+
+    /* Sidebar */
+    .hc-sidebar{
+      position:sticky;
+      top:92px; /* header height + small offset */
+      align-self:start;
+      padding-top:6px;
+      max-height: calc(100vh - 110px);
+      overflow:auto;
+    }
+    .hc-sidebar h2{
+      margin:0 0 14px;
+      font-size:18px;
+      font-weight:800;
+    }
+    .hc-nav{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    .hc-nav a{
+      display:block;
+      padding:10px 10px;
+      border-radius:8px;
+      color:#111;
+      font-size:14px;
+      line-height:1.2;
+      font-weight:600;
+    }
+    .hc-nav a:hover{background:#f3f3f3}
+    .hc-nav a[aria-current="true"]{
+      background:#111;
+      color:#fff;
+    }
+
+    /* Content sections */
+    .hc-section{
+      scroll-margin-top: 96px;
+      padding-top:10px;
+    }
+    .hc-section__title{
+      margin:0 0 14px;
+      font-size:18px;
+      font-weight:800;
+    }
+    .hc-accordion{
+      border-top:1px solid var(--line);
+    }
+    .hc-item{
+      border-bottom:1px solid var(--line);
+    }
+    .hc-item button{
+      width:100%;
+      text-align:left;
+      background:transparent;
+      border:0;
+      padding:16px 6px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      cursor:pointer;
+      font-size:14px;
+      font-weight:700;
+      color:#111;
+    }
+    .hc-item button .chev{
+      width:22px;
+      height:22px;
+      flex:0 0 auto;
+      transition: transform .15s ease;
+      color:#6a6a6a;
+    }
+    .hc-item[data-open="true"] button .chev{
+      transform: rotate(180deg);
+    }
+    .hc-panel{
+      display:none;
+      padding:0 6px 16px;
+      color:#222;
+      font-size:14px;
+      line-height:1.55;
+    }
+    .hc-item[data-open="true"] .hc-panel{display:block}
+    .hc-panel p{margin:0 0 10px}
+    .hc-panel ul{margin:0 0 10px; padding-left:18px}
+    .hc-panel li{margin:6px 0}
+    .hc-panel a{color:#111; text-decoration:underline}
+
+    /* Search results helper */
+    .hc-results-meta{
+      display:none;
+      margin: 0 0 18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .hc-results-meta strong{color:var(--text)}
+    mark{
+      background: #fff2a8;
+      padding:0 2px;
+      border-radius:2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hc-grid{grid-template-columns: 1fr; gap:18px}
+      .hc-sidebar{
+        position:relative;
+        top:auto;
+        max-height:none;
+        overflow:visible;
+        padding:0;
+      }
+      .hc-nav{
+        flex-direction:row;
+        flex-wrap:wrap;
+        gap:8px;
+      }
+      .hc-nav a{
+        padding:10px 12px;
+        border:1px solid var(--line);
+        border-radius:999px;
+        background:#fff;
+      }
+      .hc-nav a[aria-current="true"]{
+        border-color:#111;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hc-header">
+    <div class="hc-header__inner">
+      <a class="hc-logo" href="https://compravibrosculpt.com/" aria-label="Vibro Sculpt">
+        <img
+          src="https://attachments.gorgias.help/cdn-cgi/image/quality=100,width=640/https://attachments.gorgias.help/uploads.gorgias.io/VvEzB7NZXm7beky0/vibro-sculpt-b0fda608-a915-4dac-b97f-7d39a2985add.png"
+          alt="Vibro Sculpt Latam logo"
+        />
+      </a>
+    </div>
+  </header>
+
+  <section class="hc-hero" aria-label="Hero">
+    <div class="hc-hero__bg" aria-hidden="true"></div>
+    <div class="hc-hero__inner">
+      <h1>PREGUNTAS FRECUENTES</h1>
+
+      <form class="hc-search" id="searchForm" role="search" aria-label="Buscar en FAQs">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#6a6a6a" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5C16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 5 1.5-1.5-5-5ZM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/>
+        </svg>
+        <input id="searchInput" type="search" placeholder="Search" autocomplete="off" />
+        <button type="button" id="clearBtn" aria-label="Limpiar búsqueda" style="display:none;">Limpiar</button>
+      </form>
+    </div>
+  </section>
+
+  <main class="hc-main">
+    <h2 class="hc-title">FAQs</h2>
+
+    <p class="hc-results-meta" id="resultsMeta"></p>
+
+    <div class="hc-grid">
+      <aside class="hc-sidebar" aria-label="Categorías">
+        <h2>FAQs</h2>
+        <ul class="hc-nav" id="categoryNav"></ul>
+      </aside>
+
+      <div id="content"></div>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * Reemplaza este objeto con el contenido completo del TXT.
+     * Formato:
+     * - categories: [{ id, title, items: [{ id, q, aHtml }] }]
+     */
+    const FAQ_DATA = {
+      categories: [
+        {
+          id: "devoluciones-y-cambios",
+          title: "Devoluciones y Cambios",
+          items: [
+            {
+              id: "politica-de-devoluciones",
+              q: "¿Cuál es su política de devoluciones?",
+              aHtml: `
+                <p>En Vibro Sculpt, queremos que ames nuestros productos tanto como nosotros, y estamos comprometidos con tu satisfacción. Sin embargo, entendemos que a veces un producto puede no cumplir con tus expectativas o necesidades. Si necesitas devolver un artículo, por favor revisa los siguientes términos:</p>
+                <ul>
+                  <li><strong>Elegibilidad:</strong> Las devoluciones se aceptan dentro de los <strong>5 días</strong> posteriores a la recepción de tu pedido. Para iniciar una devolución, por favor contacta a nuestro Equipo de Experiencia del Cliente en <a href="mailto:hola@compravibrosculpt.com">hola@compravibrosculpt.com</a> dentro de este período.</li>
+                  <li><strong>Tiempo de Procesamiento:</strong> Después de recibir tu devolución en nuestro almacén, por favor permite de 3 a 7 días hábiles para su procesamiento.</li>
+                  <li><strong>Detalles del Reembolso:</strong> El reembolso se acreditará a tu forma de pago original (excluye envío) y se deduce una tarifa de reposición del 20%.</li>
+                </ul>
+                <p><strong>Nota:</strong> Los artículos que no cumplan con las condiciones serán revisados caso por caso.</p>
+              `
+            },
+            {
+              id: "terminos-devolucion",
+              q: "Términos y Condiciones de Devolución",
+              aHtml: `
+                <ul>
+                  <li>Los artículos devueltos deben encontrarse en condiciones "como nuevos".</li>
+                  <li>Personalizados, reacondicionados y oferta final no aplican.</li>
+                  <li>Debe incluir prueba de compra.</li>
+                  <li>Transporte y logística no son reembolsables.</li>
+                  <li><strong>Se aplica una tarifa de reposición del 20%.</strong></li>
+                </ul>
+                <hr/>
+                <p><strong>Países con legislación específica:</strong> Colombia / México / Chile / Ecuador. En caso de conflicto, prevalece la ley local.</p>
+              `
+            },
+            {
+              id: "como-nuevo",
+              q: "¿Cómo define Vibro Sculpt el estado \"como nuevo\"?",
+              aHtml: `<p>"Como nuevo" significa que el producto debe estar libre de defectos visibles (rayaduras, abolladuras o manchas) e incluir accesorios y empaque original en buen estado.</p>`
+            },
+            {
+              id: "iniciar-devolucion",
+              q: "¿Cómo inicio una devolución?",
+              aHtml: `<p>Contacta a nuestro equipo de Servicio al Cliente o envíanos un correo a <a href="mailto:hola@compravibrosculpt.com">hola@compravibrosculpt.com</a>.</p>`
+            },
+            {
+              id: "cambios",
+              q: "Cambios",
+              aHtml: `
+                <ul>
+                  <li>Se permiten dentro de 5 días calendario desde la entrega, cumpliendo condiciones.</li>
+                  <li>Sujeto a disponibilidad.</li>
+                  <li>El cliente cubre envío, excepto productos defectuosos.</li>
+                </ul>
+              `
+            },
+            {
+              id: "devolver-todo",
+              q: "¿Qué sucede si no devuelvo todo lo que está en mi pedido?",
+              aHtml: `<p>Se reembolsa lo devuelto. Lo no devuelto no es elegible para reembolso y no se incluye en el monto.</p>`
+            },
+            {
+              id: "danado-defectuoso",
+              q: "¿Qué hago si recibo un producto dañado o defectuoso?",
+              aHtml: `<p>Contáctanos dentro de los 5 días posteriores a la entrega. Evaluaremos el caso y podemos ofrecer reemplazo o reembolso.</p>`
+            }
+          ]
+        },
+        {
+          id: "envio-y-entregas",
+          title: "Envío y Entregas",
+          items: [
+            {
+              id: "cuando-se-envia",
+              q: "¿Cuándo será enviado mi pedido?",
+              aHtml: `
+                <p>Procesamos los pedidos en un plazo de <strong>1 día hábil</strong>. Pedidos en fin de semana o festivos se procesan el siguiente día hábil.</p>
+                <p>Recibirás un correo con el seguimiento cuando sea enviado.</p>
+              `
+            }
+            // TODO: pega el resto de preguntas/respuestas de tu TXT aquí
+          ]
+        },
+        {
+          id: "pagos",
+          title: "Pagos",
+          items: []
+        },
+        {
+          id: "terminos-y-condiciones",
+          title: "Términos y Condiciones",
+          items: []
+        },
+        {
+          id: "vibro-sculpt",
+          title: "Vibro Sculpt",
+          items: []
+        },
+        {
+          id: "especificaciones-del-dispositivo",
+          title: "Especificaciones del Dispositivo",
+          items: []
+        },
+        {
+          id: "sobre-nosotros",
+          title: "Sobre Nosotros",
+          items: []
+        }
+      ]
+    };
+
+    const contentEl = document.getElementById("content");
+    const navEl = document.getElementById("categoryNav");
+    const searchInput = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearBtn");
+    const resultsMeta = document.getElementById("resultsMeta");
+
+    function slugToHash(id){ return `#category-${id}`; }
+
+    function escapeHtml(str){
+      return (str ?? "").replace(/[&<>"']/g, (m) => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[m]));
+    }
+
+    function highlight(text, term){
+      if(!term) return escapeHtml(text);
+      const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "ig");
+      return escapeHtml(text).replace(re, "<mark>$1</mark>");
+    }
+
+    function buildNav(categories){
+      navEl.innerHTML = "";
+      categories.forEach((cat, idx) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = slugToHash(cat.id);
+        a.textContent = cat.title;
+        a.dataset.catId = cat.id;
+        a.setAttribute("aria-current", idx === 0 ? "true" : "false");
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelector(slugToHash(cat.id))?.scrollIntoView({behavior:"smooth", block:"start"});
+          setActiveCat(cat.id);
+        });
+        li.appendChild(a);
+        navEl.appendChild(li);
+      });
+    }
+
+    function setActiveCat(catId){
+      navEl.querySelectorAll("a").forEach(a => {
+        a.setAttribute("aria-current", a.dataset.catId === catId ? "true" : "false");
+      });
+    }
+
+    function buildContent(data, term=""){
+      contentEl.innerHTML = "";
+
+      let totalMatches = 0;
+      let totalQuestions = 0;
+
+      data.categories.forEach((cat) => {
+        // Filter items if searching
+        const items = (cat.items || []).filter(item => {
+          if(!term) return true;
+          const hay = (item.q + " " + item.aHtml).toLowerCase();
+          return hay.includes(term.toLowerCase());
+        });
+
+        // Hide empty categories in search mode
+        if(term && items.length === 0) return;
+
+        const section = document.createElement("section");
+        section.className = "hc-section";
+        section.id = `category-${cat.id}`;
+
+        const h = document.createElement("h3");
+        h.className = "hc-section__title";
+        h.textContent = cat.title;
+        section.appendChild(h);
+
+        const acc = document.createElement("div");
+        acc.className = "hc-accordion";
+
+        items.forEach((item) => {
+          totalQuestions++;
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "hc-item";
+          wrapper.dataset.open = "false";
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.setAttribute("aria-expanded", "false");
+
+          const qSpan = document.createElement("span");
+          qSpan.innerHTML = term ? highlight(item.q, term) : escapeHtml(item.q);
+
+          const chev = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          chev.setAttribute("viewBox", "0 0 24 24");
+          chev.setAttribute("class", "chev");
+          chev.innerHTML = `<path fill="currentColor" d="M8.71 11.71 11.3 14.3c.39.39 1.02.39 1.41 0l2.59-2.59c.63-.63.19-1.71-.7-1.71H9.41c-.89 0-1.33 1.08-.7 1.71Z"/>`;
+
+          btn.appendChild(qSpan);
+          btn.appendChild(chev);
+
+          const panel = document.createElement("div");
+          panel.className = "hc-panel";
+
+          // In search mode, auto-open matched items
+          const autoOpen = !!term;
+
+          const aHtml = item.aHtml || "<p>(Sin contenido)</p>";
+          panel.innerHTML = term
+            ? aHtml.replace(
+                new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "ig"),
+                "<mark>$1</mark>"
+              )
+            : aHtml;
+
+          btn.addEventListener("click", () => {
+            const open = wrapper.dataset.open === "true";
+            wrapper.dataset.open = open ? "false" : "true";
+            btn.setAttribute("aria-expanded", open ? "false" : "true");
+          });
+
+          wrapper.appendChild(btn);
+          wrapper.appendChild(panel);
+
+          if(autoOpen){
+            wrapper.dataset.open = "true";
+            btn.setAttribute("aria-expanded", "true");
+            totalMatches++;
+          }
+
+          acc.appendChild(wrapper);
+        });
+
+        section.appendChild(acc);
+        contentEl.appendChild(section);
+      });
+
+      // Meta for search
+      if(term){
+        resultsMeta.style.display = "block";
+        resultsMeta.innerHTML = `Resultados para <strong>${escapeHtml(term)}</strong>: ${totalQuestions} pregunta(s) encontrada(s).`;
+      } else {
+        resultsMeta.style.display = "none";
+        resultsMeta.textContent = "";
+      }
+    }
+
+    // Intersection observer to keep sidebar active while scrolling (menu "funciona")
+    let observer;
+    function setupObserver(){
+      observer?.disconnect();
+      const sections = Array.from(document.querySelectorAll(".hc-section"));
+      if(sections.length === 0) return;
+
+      observer = new IntersectionObserver((entries) => {
+        // Pick the most visible entry
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if(!visible) return;
+
+        const id = visible.target.id.replace("category-", "");
+        setActiveCat(id);
+      }, {
+        root: null,
+        threshold: [0.2, 0.35, 0.5, 0.65]
+      });
+
+      sections.forEach(sec => observer.observe(sec));
+    }
+
+    // Search behavior
+    function runSearch(term){
+      const t = term.trim();
+      clearBtn.style.display = t ? "block" : "none";
+      buildContent(FAQ_DATA, t);
+      setupObserver();
+      if(!t){
+        // ensure first cat active after reset
+        setActiveCat(FAQ_DATA.categories[0]?.id);
+      }
+    }
+
+    // Init
+    buildNav(FAQ_DATA.categories);
+    buildContent(FAQ_DATA, "");
+    setupObserver();
+    setActiveCat(FAQ_DATA.categories[0]?.id);
+
+    searchInput.addEventListener("input", () => runSearch(searchInput.value));
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      runSearch("");
+      searchInput.focus();
+    });
+
+    // Allow hash navigation on load
+    window.addEventListener("load", () => {
+      if(location.hash && document.querySelector(location.hash)){
+        document.querySelector(location.hash).scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Términos del Servicio – Vibro Sculpt</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #007bff;
+      --primary-dark: #0057B5;
+      --text: #1a2633;
+      --border: rgba(14,62,89,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background: #fff;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* =====================
+       TOP BANNER
+    ===================== */
+    .top-banner {
+      background: var(--primary);
+      text-align: center;
+      position: relative;
+      min-height: 33px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .banner-slides {
+      display: flex;
+      width: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .banner-slide {
+      min-width: 100%;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 50px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .banner-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.8);
+      font-size: 18px;
+      padding: 6px 10px;
+      z-index: 2;
+      line-height: 1;
+    }
+    .banner-arrow--prev { left: 8px; }
+    .banner-arrow--next { right: 8px; }
+    .banner-arrow:hover { color: #fff; }
+
+    /* =====================
+       HEADER
+    ===================== */
+    .header-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .header__hamburger div {
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+
+    .header__logo svg { display: block; }
+
+    .header__nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .header__nav a {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: color .15s;
+    }
+    .header__nav a:hover { color: var(--primary); text-decoration: none; }
+
+    .header__cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .header__cart svg { display: block; }
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #c40064;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =====================
+       POLICY CONTENT
+    ===================== */
+    .policy-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .policy-wrap h1 {
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 36px;
+      letter-spacing: -0.02em;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 16px;
+    }
+
+    .policy-body { color: #2a3a4a; }
+
+    .policy-body p {
+      margin-bottom: 14px;
+      font-size: 14.5px;
+      line-height: 1.75;
+    }
+
+    /* H2 = section title (TÉRMINOS Y CONDICIONES DE USO) */
+    .policy-body h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    /* H3 = numbered sections */
+    .policy-body h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 36px 0 12px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .policy-body h3::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .policy-body ul {
+      padding-left: 22px;
+      margin-bottom: 14px;
+    }
+
+    .policy-body li {
+      margin-bottom: 10px;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    .policy-body a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .policy-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 28px 0;
+    }
+
+    /* Section card styling */
+    .policy-section {
+      background: #f8fbff;
+      border: 1px solid rgba(0,91,181,0.1);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .policy-section h3 {
+      margin-top: 0;
+    }
+
+    .policy-section p:last-child,
+    .policy-section ul:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Delivery table */
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .delivery-item {
+      background: #fff;
+      border: 1px solid rgba(0,91,181,0.15);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .delivery-item .flag {
+      font-size: 22px;
+    }
+
+    .delivery-item .country {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--primary-dark);
+      display: block;
+    }
+
+    .delivery-item .days {
+      font-size: 13px;
+      color: #555;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    .footer {
+      background: #eef3f7;
+      color: #0e3e59;
+      padding: 64px 20px 30px;
+    }
+
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    .footer__nav,
+    .footer__legal {
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer__nav {
+      display: grid;
+      grid-template-columns: 430px 1fr;
+      column-gap: 56px;
+      row-gap: 40px;
+      align-items: start;
+    }
+
+    .footer_form { width: 100%; }
+
+    .footer_form h2 {
+      margin: 0 0 16px;
+      color: #0b63ff;
+      font-weight: 800;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .footer_form_row {
+      position: relative;
+      max-width: 420px;
+      margin-top: 10px;
+    }
+
+    .footer_form input[type="email"] {
+      width: 100%;
+      height: 54px;
+      padding: 0 58px 0 18px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(14,62,89,0.55);
+      background: #fff;
+      outline: none;
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      color: #0e3e59;
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+
+    .footer_form input[type="email"]::placeholder { color: rgba(14,62,89,0.45); }
+    .footer_form input[type="email"]:focus {
+      border-color: #0b63ff;
+      box-shadow: 0 0 0 4px rgba(11,99,255,0.12);
+    }
+
+    .footer_form .footer_submit {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 150ms;
+    }
+    .footer_form .footer_submit:hover { background: rgba(11,99,255,0.08); }
+    .footer_form .footer_submit svg { width: 22px; height: 22px; display: block; }
+
+    .footer_form .footer_form_help {
+      margin: 14px 0 0;
+      max-width: 420px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: rgba(14,62,89,0.92);
+    }
+
+    .footer_form_success {
+      margin-top: 10px;
+      color: #0b63ff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .footer__nav__links {
+      display: grid;
+      grid-template-columns: 1fr 170px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .footer__nav__links__menus {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 40px;
+    }
+
+    .footer__nav__links__menus h4 {
+      margin: 0 0 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0b63ff;
+    }
+
+    .footer__nav__links__menus a {
+      display: block;
+      margin: 10px 0;
+      font-size: 13.5px;
+      color: rgba(14,62,89,0.95);
+    }
+
+    .footer__nav__social {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 36px;
+    }
+
+    .footer__nav__social a {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0;
+      overflow: hidden;
+      transition: transform 150ms;
+    }
+    .footer__nav__social a:hover { transform: translateY(-2px); }
+    .footer__nav__social svg { width: 30px; height: 30px; display: block; }
+
+    .footer__legal {
+      margin-top: 44px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(14,62,89,0.12);
+    }
+
+    .footer__legal__menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .footer__legal__menu a { font-size: 13.5px; color: rgba(14,62,89,0.95); }
+    .footerBrand { font-size: 18px; font-weight: 800; color: var(--primary-dark) !important; }
+
+    .footer__legal__copyright {
+      text-align: center;
+      color: rgba(14,62,89,0.88);
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .footer__legal__copyright p {
+      margin: 10px 0;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    /* =====================
+       MOBILE MENU
+    ===================== */
+    .mobile-menu {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 320px;
+      max-width: 100vw;
+      background: #fff;
+      z-index: 200;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      box-shadow: -4px 0 24px rgba(0,0,0,.12);
+    }
+    .mobile-menu.is-open { transform: translateX(0); }
+
+    .mobile-menu__close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 24px;
+    }
+
+    .mobile-menu nav ul { list-style: none; }
+    .mobile-menu nav ul li { border-bottom: 1px solid var(--border); }
+    .mobile-menu nav ul li a {
+      display: block;
+      padding: 14px 0;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.4);
+      z-index: 199;
+    }
+    .menu-overlay.is-open { display: block; }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 900px) {
+      .header__nav { display: none; }
+      .header__hamburger { display: flex; }
+      .footer__nav { grid-template-columns: 1fr; }
+      .footer__nav__links { grid-template-columns: 1fr; }
+      .footer__nav__social { margin-top: 12px; }
+      .delivery-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .footer { padding: 52px 16px 26px; }
+      .footer_form h2 { font-size: 26px; }
+      .footer__nav__links__menus { grid-template-columns: 1fr; gap: 22px; }
+      .footer__legal__menu { gap: 18px; }
+      .policy-section { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BANNER -->
+  <div class="top-banner">
+    <button class="banner-arrow banner-arrow--prev" aria-label="Anterior" onclick="moveBanner(-1)">&#8249;</button>
+    <div class="banner-slides" id="bannerSlides">
+      <div class="banner-slide">GARANTÍA DE SATISFACCIÓN</div>
+      <div class="banner-slide">SOPORTE 24/7</div>
+    </div>
+    <button class="banner-arrow banner-arrow--next" aria-label="Siguiente" onclick="moveBanner(1)">&#8250;</button>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header-sticky">
+    <header class="header">
+      <button class="header__hamburger" aria-label="Menú" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+      </button>
+
+      <a class="header__logo" href="/" aria-label="Vibro Sculpt">
+        <svg xmlns="http://www.w3.org/2000/svg" width="140" height="30" viewBox="0 0 151 30" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M64.0946 23.6889C65.2793 23.6444 66.3979 23.376 67.4106 22.9263C67.8675 22.7229 68.3035 22.4818 68.7134 22.2083C68.5084 22.2288 68.3017 22.2425 68.095 22.251C66.3006 22.316 64.6001 21.9057 63.1201 21.1346C61.5863 20.3345 60.2888 19.1496 59.3681 17.705L59.3664 17.7033C58.8852 16.9441 58.6143 16.0722 58.5813 15.1763C58.55 14.3112 58.7411 13.4256 59.1823 12.6067C59.2848 12.4135 59.3994 12.2305 59.5245 12.0562C59.4133 12.1194 59.3039 12.1844 59.1944 12.2528C57.2472 13.4684 55.8593 15.4037 55.333 17.6041C56.0243 19.7822 57.5773 21.6167 59.6409 22.6921C60.9697 23.3811 62.4896 23.747 64.0946 23.6889Z" fill="#898A8D"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M55.9567 10.9308C55.4026 11.9601 55.0812 13.0474 54.9718 14.1365C54.9214 14.6272 54.9162 15.1196 54.951 15.6068C55.0361 15.4222 55.1264 15.2392 55.2237 15.058C56.0627 13.4971 57.2751 12.2524 58.6943 11.3771C60.1621 10.4726 61.8539 9.95972 63.5858 9.89646H63.5875C64.496 9.86569 65.401 10.0709 66.2052 10.4914C67.2057 11.0146 67.9996 11.8421 68.4773 12.8525C68.4807 10.459 67.4628 8.14745 65.6928 6.50786C63.4294 6.00863 61.0393 6.41383 59.0608 7.63626C57.7927 8.421 56.7088 9.53401 55.9567 10.9308Z" fill="#898A8D"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M71.2529 10.3719C70.6206 9.38201 69.8268 8.56307 68.9253 7.92707C68.517 7.63984 68.088 7.38852 67.6416 7.1748C67.7632 7.34064 67.8796 7.5099 67.989 7.68258C68.9426 9.17856 69.4307 10.8318 69.4915 12.4783C69.5541 14.1845 69.1597 15.884 68.3486 17.3936C67.9195 18.1852 67.2872 18.8537 66.516 19.329C65.7725 19.7889 64.8988 20.0676 63.9591 20.1C63.7385 20.1069 63.5196 20.1018 63.3042 20.083C63.4154 20.1462 63.5265 20.206 63.6412 20.2659C65.6857 21.3173 68.0828 21.5328 70.2819 20.8814C71.8522 19.1973 72.6894 16.9679 72.6026 14.6667C72.5452 13.1929 72.1058 11.714 71.2529 10.3719Z" fill="#898A8D"/>
+          <path d="M33.5194 21.8236C30.6654 21.8236 29.4061 19.8404 29.4061 19.8404V21.4646H25.7131V1.88525H29.4061V9.59595C29.4061 9.59595 30.582 7.64006 33.5194 7.64006C35.3381 7.64006 37.0456 8.38378 38.331 9.73272C39.5903 11.0543 40.2886 12.8444 40.2886 14.7165C40.2886 18.6556 37.2679 21.8236 33.5194 21.8236ZM33.0434 18.7667C34.0231 18.7667 34.9455 18.353 35.6177 17.6093C36.316 16.8382 36.7086 15.8466 36.7086 14.7455C36.7086 13.6445 36.316 12.6238 35.6177 11.8818C34.9455 11.1381 34.0231 10.7261 33.0434 10.7261C32.0915 10.7261 31.1692 11.1381 30.4969 11.8818C29.7986 12.6255 29.4061 13.6445 29.4061 14.7455C29.4061 15.8466 29.7986 16.8382 30.4969 17.6093C31.1692 18.353 32.0915 18.7667 33.0434 18.7667Z" fill="#898A8D"/>
+          <path d="M106.55 19.3168C105.235 20.8863 103.248 21.9053 101.038 21.9053C97.0654 21.9053 93.8762 18.7116 93.8762 14.7451C93.8762 10.8077 97.0654 7.6123 101.038 7.6123C103.194 7.6123 105.124 8.57657 106.438 10.0914L104.677 11.7156C103.81 10.6145 102.495 9.89816 101.04 9.89816C98.4377 9.89816 96.3393 12.0729 96.3393 14.7451C96.3393 17.443 98.4377 19.6194 101.04 19.6194C102.551 19.6194 103.894 18.8757 104.76 17.72L106.55 19.3168Z" fill="#636566"/>
+          <path d="M111.073 19.2898C112.723 20.4182 117.423 19.7309 117.423 14.8275V8.02637H119.914V21.4645H117.423V19.0419C117.116 20.0882 115.549 21.9603 112.975 21.9603C108.861 21.9603 107.239 19.2607 107.239 16.4808V8.02637H109.7V14.7728C109.702 16.674 109.758 18.3802 111.073 19.2898Z" fill="#636566"/>
+          <path d="M123.821 1.88525H121.33V21.4646H123.821V1.88525Z" fill="#636566"/>
+          <path d="M138.072 19.84C136.784 21.1889 135.079 21.9326 133.288 21.9326C130.517 21.9326 128.839 20.5563 127.917 19.3989V27.9354H125.343V8.05339H127.917V10.2008C128.811 9.0433 130.519 7.63965 133.288 7.63965C137.036 7.63965 140.059 10.8607 140.059 14.7998C140.059 16.701 139.359 18.491 138.072 19.84ZM132.756 9.54082C130.071 9.54082 127.915 11.8814 127.915 14.7725C127.915 17.6909 130.069 20.0332 132.756 20.0332C135.469 20.0332 137.625 17.6926 137.625 14.7725C137.625 11.8814 135.471 9.54082 132.756 9.54082Z" fill="#636566"/>
+          <path d="M148.857 8.02635V10.0643H145.277V21.4645H142.758V10.0643H139.932V8.02635H142.758V3.31787H145.277V8.02635H148.857Z" fill="#636566"/>
+          <path d="M15.5045 1.88525L10.2569 13.2034L4.64978 1.88525H0.5L10.0606 21.4646L19.6213 1.88525H15.5045Z" fill="#898A8D"/>
+          <path d="M24.327 8.02637H20.6619V21.4645H24.327V8.02637Z" fill="#898A8D"/>
+          <path d="M24.327 1.88525H20.6619V5.42773H24.327V1.88525Z" fill="#898A8D"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M58.2182 23.5092C52.0205 20.1497 50.5596 12.7946 51.2579 6.43799C46.5801 12.6732 51.1207 24.5641 58.2182 23.5092Z" fill="#636566"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M68.479 23.9862C62.4236 27.5902 55.2219 25.1573 49.9778 21.3823C53.1288 28.4878 65.8595 30.5633 68.479 23.9862Z" fill="#636566"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M74.0304 15.4771C74.1745 22.4406 68.4319 27.3611 62.4895 29.9461C70.3166 30.813 78.5084 20.9993 74.0304 15.4771Z" fill="#636566"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M69.3213 6.49108C75.519 9.85061 76.9799 17.2057 76.2816 23.5623C80.9559 17.3271 76.4171 5.4362 69.3213 6.49108Z" fill="#636566"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M59.0571 6.01401C65.1124 2.40999 72.3142 4.84287 77.5583 8.61787C74.4108 1.5124 61.6783 -0.563159 59.0571 6.01401Z" fill="#636566"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M53.5074 14.5214C53.3632 7.55783 59.1041 2.63563 65.0483 0.054005C57.2212 -0.814517 49.0293 9.0008 53.5074 14.5214Z" fill="#636566"/>
+          <path d="M48.2095 11.639C48.279 10.7123 48.4423 9.81818 48.6976 8.97188C48.7984 8.6385 48.913 8.31365 49.0415 7.99907C48.2338 7.99565 46.5489 8.17004 45.1002 9.51386V8.02643H41.4351V21.4646H45.1002V14.4429C45.1002 13.8924 45.2114 13.2598 45.7985 12.5708C46.4864 11.7706 47.44 11.6065 48.2095 11.639Z" fill="#898A8D"/>
+          <path d="M80.4541 6.84134C80.4541 4.55549 83.5043 3.95026 84.9026 3.95026C87.4196 3.95026 89.6587 4.74869 91.281 6.20876L91.3644 3.15184C90.0773 1.99609 87.5881 1.4165 85.2101 1.4165C81.8524 1.4165 78.1873 3.01335 78.1873 6.81399C78.1873 14.882 90.7773 10.8061 90.7773 16.1489C90.7773 17.7457 88.6512 19.4264 85.4898 19.4264C83.2177 19.4264 80.8276 18.4621 79.365 17.332C79.365 17.385 79.365 17.438 79.3632 17.4927C79.3528 18.4211 79.2521 19.3204 79.061 20.1786C80.5583 21.2386 83.0336 21.9054 85.4602 21.9054C89.2088 21.9054 92.959 20.2812 92.959 15.901C92.9608 8.41084 80.4541 12.4047 80.4541 6.84134Z" fill="#636566"/>
+        </svg>
+      </a>
+
+      <ul class="header__nav">
+        <li><a href="#">INICIO</a></li>
+        <li><a href="#">VIBRO SCULPT</a></li>
+        <li><a href="#">NOSOTROS</a></li>
+      </ul>
+
+      <a class="header__cart" href="#" aria-label="Carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M6 8.5C6 7.94772 6.44772 7.5 7 7.5H10C10.4936 7.5 10.9133 7.86011 10.9884 8.34794L11.4733 11.5H27C27.3125 11.5 27.607 11.6461 27.7961 11.8949C27.9852 12.1437 28.0472 12.4665 27.9635 12.7676L25.4635 21.7676C25.3433 22.2005 24.9492 22.5 24.5 22.5H12C11.5064 22.5 11.0867 22.1399 11.0116 21.6521L9.14208 9.5H7C6.44772 9.5 6 9.05228 6 8.5ZM11.781 13.5L12.8579 20.5H23.7399L25.6844 13.5H11.781Z" fill="#2A63FF"/>
+          <path d="M16 26C16 27.1046 15.1046 28 14 28C12.8954 28 12 27.1046 12 26C12 24.8954 12.8954 24 14 24C15.1046 24 16 24.8954 16 26Z" fill="#2A63FF"/>
+          <path d="M25 26C25 27.1046 24.1046 28 23 28C21.8954 28 21 27.1046 21 26C21 24.8954 21.8954 24 23 24C24.1046 24 25 24.8954 25 26Z" fill="#2A63FF"/>
+          <circle cx="26" cy="13" r="6" fill="#C40064"/>
+        </svg>
+        <span class="cart-count">1</span>
+      </a>
+    </header>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu__close" onclick="toggleMenu()" aria-label="Cerrar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289Z" fill="black"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z" fill="black"/>
+      </svg>
+    </button>
+    <nav>
+      <ul>
+        <li><a href="#">INICIO</a></li>
+        <li><a href="#">VIBRO SCULPT</a></li>
+        <li><a href="#">NOSOTROS</a></li>
+        <li><a href="#">CONTÁCTANOS</a></li>
+        <li><a href="#">CENTRO DE AYUDA</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="policy-wrap">
+      <h1>Términos del servicio</h1>
+
+      <div class="policy-body">
+
+        <h2>TÉRMINOS Y CONDICIONES DE USO – VIBRO SCULPT LATAM</h2>
+        <p><strong>Última actualización:</strong> 27 de agosto del 2025</p>
+
+        <p>Digital Trends Corp., una sociedad registrada en Florida, Estados Unidos, es la propietaria de la marca Vibro Sculpt LATAM y la operadora del sitio web oficial de Vibro Sculpt para la región de Latinoamérica.</p>
+
+        <p>Estos términos y condiciones regulan el acceso, navegación y uso de dicho sitio web, así como la compra de productos de la marca Vibro Sculpt en Colombia, México, Chile y Ecuador. Al acceder y realizar una compra en el Sitio, el usuario acepta estar sujeto a estos términos. Digital Trends Corp. se reserva el derecho de actualizar o modificar estos términos en cualquier momento sin previo aviso, por lo que se recomienda revisarlos periódicamente.</p>
+
+        <hr>
+
+        <!-- Sección 1 -->
+        <div class="policy-section">
+          <h3>1. DESCRIPCIÓN DEL PRODUCTO</h3>
+          <p>Vibro Sculpt es un masajeador de belleza portátil diseñado para apoyar el moldeado corporal y brindar masajes relajantes en diferentes áreas del cuerpo, todo desde la comodidad de tu hogar. Su tecnología exclusiva <strong>VibroBuff™</strong>, con microvibraciones, estimula zonas específicas sin necesidad de procedimientos invasivos. Gracias a su diseño ergonómico, es fácil de usar en abdomen, brazos, glúteos y piernas, ofreciendo practicidad y resultados visibles en tu rutina diaria.</p>
+        </div>
+
+        <!-- Sección 2 -->
+        <div class="policy-section">
+          <h3>2. POLÍTICA DE PROMOCIONES</h3>
+          <ul>
+            <li>A menos que se indique lo contrario, los precios publicados ya reflejan los descuentos aplicables.</li>
+            <li>Las ofertas son válidas hasta agotar existencias.</li>
+            <li>No aplican a compras anteriores, cargos por envío ni impuestos.</li>
+            <li>Solo se permite un código de descuento por transacción.</li>
+            <li>Los códigos promocionales no tienen valor monetario ni son canjeables por dinero.</li>
+            <li>Las ofertas no pueden ser transferidas, vendidas ni acumuladas.</li>
+            <li>No son válidas donde la ley las prohíba o restrinja.</li>
+            <li>La devolución de un artículo adquirido con promoción puede anular el beneficio o generar un cargo proporcional.</li>
+            <li>Digital Trends Corp. se reserva el derecho de modificar o finalizar cualquier promoción sin previo aviso.</li>
+            <li>Los códigos promocionales no pueden aplicarse retroactivamente a pedidos ya realizados.</li>
+            <li>Se pueden aplicar restricciones adicionales según cada promoción.</li>
+          </ul>
+        </div>
+
+        <!-- Sección 3 -->
+        <div class="policy-section">
+          <h3>3. POLÍTICA DE GARANTÍA</h3>
+          <p>Digital Trends Corp. ofrece garantía sobre sus productos por defectos de fabricación, bajo los siguientes términos:</p>
+          <p><strong>Esta garantía NO cubre:</strong></p>
+          <ul>
+            <li>Productos adquiridos a revendedores o distribuidores no autorizados.</li>
+            <li>Daños por mal uso, negligencia, caídas, contacto con líquidos o alteraciones.</li>
+            <li>Uso fuera del propósito previsto o incumplimiento de instrucciones de uso.</li>
+            <li>Desgaste normal, ruidos, rayones o daños cosméticos no funcionales.</li>
+            <li>Piezas consumibles (cables, fundas, accesorios intercambiables).</li>
+            <li>Modificaciones, reparaciones no autorizadas o manipulación de número de serie.</li>
+          </ul>
+        </div>
+
+        <!-- Sección 4 -->
+        <div class="policy-section">
+          <h3>4. ARTÍCULOS FALTANTES</h3>
+          <ul>
+            <li>Cualquier producto faltante debe ser reportado dentro de los <strong>5 días hábiles posteriores a la entrega</strong>.</li>
+            <li>Reclamos realizados fuera de este periodo no califican para reembolso o reposición.</li>
+            <li>Es responsabilidad del cliente revisar el contenido del paquete en el momento de la entrega y reportar cualquier falta o irregularidad dentro del plazo establecido.</li>
+          </ul>
+        </div>
+
+        <!-- Sección 5 -->
+        <div class="policy-section">
+          <h3>5. ENVÍOS Y TIEMPOS DE ENTREGA</h3>
+          <p>Digital Trends Corp. procesa los pedidos en un plazo de <strong>1 día hábil</strong> y utiliza servicios logísticos de terceros para las entregas.</p>
+          <p><strong>Tiempos estimados de entrega por país:</strong></p>
+          <div class="delivery-grid">
+            <div class="delivery-item">
+              <span class="flag">🇨🇴</span>
+              <div>
+                <span class="country">Colombia</span>
+                <span class="days">3 a 7 días hábiles</span>
+              </div>
+            </div>
+            <div class="delivery-item">
+              <span class="flag">🇲🇽</span>
+              <div>
+                <span class="country">México</span>
+                <span class="days">2 a 7 días hábiles</span>
+              </div>
+            </div>
+          </div>
+          <p>Los tiempos pueden variar según la ubicación del cliente, la disponibilidad del producto y factores externos como días festivos o restricciones logísticas.</p>
+        </div>
+
+        <!-- Sección 6 -->
+        <div class="policy-section">
+          <h3>6. MÉTODOS DE PAGO ACEPTADOS</h3>
+          <p>Los siguientes métodos de pago están disponibles en todos los países donde Digital Trends Corp. opera bajo la marca Vibro Sculpt LATAM:</p>
+          <ul>
+            <li>Pago contra entrega (efectivo al momento de recibir el producto)</li>
+            <li>Pago anticipado con tarjeta de crédito o débito</li>
+          </ul>
+          <p>La disponibilidad de métodos puede depender de la ubicación exacta y de las condiciones de la empresa de logística aliada.</p>
+        </div>
+
+        <!-- Sección 7 -->
+        <div class="policy-section">
+          <h3>7. JURISDICCIÓN Y LEGISLACIÓN APLICABLE</h3>
+          <p>La interpretación y ejecución de estos términos y condiciones se regirán por las <strong>leyes del Estado de Florida, Estados Unidos de América</strong>, sin referencia a sus disposiciones sobre conflicto de leyes. El usuario acepta que cualquier disputa, reclamación o controversia derivada del uso de este sitio web o de la compra de productos se resolverá exclusivamente ante los tribunales competentes del Estado de Florida, Estados Unidos.</p>
+        </div>
+
+        <!-- Sección 8 -->
+        <div class="policy-section">
+          <h3>8. RESERVA DE DERECHOS</h3>
+          <p>Digital Trends Corp. se reserva el derecho de:</p>
+          <ul>
+            <li>Modificar estos términos y condiciones en cualquier momento.</li>
+            <li>Limitar o rechazar ventas cuando se identifiquen usos indebidos del sitio o actividades sospechosas.</li>
+            <li>Suspender promociones o modificar precios sin previo aviso.</li>
+          </ul>
+        </div>
+
+        <!-- Sección 9 -->
+        <div class="policy-section">
+          <h3>9. CONTACTO</h3>
+          <p>Para cualquier consulta legal relacionada con estos términos, el cliente puede escribir a:</p>
+          <p><a href="mailto:hello@vibrosculpt.com">hello@vibrosculpt.com</a><br>
+          Atención: Lunes a viernes, de 9:00 a.m. a 5:00 p.m. (hora COL)</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <section class="footer__nav">
+      <form id="newsletter-footer" class="footer_form" onsubmit="handleNewsletter(event)">
+        <h2>No te pierdas nada de <br>Vibro Sculpt.</h2>
+        <div class="footer_form_row">
+          <input type="email" name="email" placeholder="Email" required>
+          <button aria-label="Subscribe" type="submit" class="footer_submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12H19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 5L19 12L12 19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <p class="footer_form_help">Ingresa tu correo para recibir las mejores ofertas, consejos de fitness, bienestar y lanzamientos exclusivos.</p>
+        <p class="footer_form_success" id="newsletterSuccess" hidden>¡Gracias por suscribirte!</p>
+      </form>
+
+      <div class="footer__nav__links">
+        <div class="footer__nav__links__menus">
+          <div>
+            <h4>Inicio</h4>
+            <a href="#">Vibro Sculpt</a>
+            <a href="https://vibrosculpt.com/" target="_blank" rel="noreferrer">Vibro Sculpt US</a>
+          </div>
+          <div>
+            <h4>Nosotros</h4>
+            <a href="#">Nosotros</a>
+            <a href="#">Contacto</a>
+          </div>
+          <div>
+            <h4>Ayuda</h4>
+            <a href="https://help.compravibrosculpt.com/en-US" target="_blank" rel="noreferrer">Centro de ayuda</a>
+            <a href="#">Guías de uso</a>
+          </div>
+        </div>
+
+        <div class="footer__nav__social">
+          <a href="https://www.instagram.com/vibrosculptlatam" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <circle cx="15" cy="15" r="15" fill="#007BFF"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 8.43353C17.1272 8.43353 17.3815 8.43353 18.237 8.47977C19.0231 8.52601 19.4393 8.64162 19.7168 8.75723C20.0867 8.89595 20.3642 9.08092 20.6416 9.35838C20.9191 9.63584 21.104 9.91329 21.2428 10.2832C21.3584 10.5607 21.474 11 21.5202 11.763C21.5665 12.6185 21.5665 12.8497 21.5665 15C21.5665 17.1503 21.5665 17.3815 21.5202 18.237C21.474 19.0231 21.3584 19.4393 21.2428 19.7168C21.104 20.0867 20.9191 20.3642 20.6416 20.6416C20.3642 20.9191 20.0867 21.104 19.7168 21.2428C19.4393 21.3584 19 21.474 18.237 21.5202C17.3815 21.5665 17.1503 21.5665 15 21.5665C12.8497 21.5665 12.6185 21.5665 11.763 21.5202C10.9769 21.474 10.5607 21.3584 10.2832 21.2428C9.91329 21.104 9.63583 20.9191 9.35837 20.6416C9.08092 20.3642 8.89595 20.0867 8.75722 19.7168C8.64161 19.4393 8.52601 19 8.47977 18.237C8.43352 17.3815 8.43352 17.1503 8.43352 15C8.43352 12.8497 8.43352 12.6185 8.47977 11.763C8.52601 10.9769 8.64161 10.5607 8.75722 10.2832C8.89595 9.91329 9.08092 9.63584 9.35837 9.35838C9.63583 9.08092 9.91329 8.89595 10.2832 8.75723C10.5607 8.64162 11 8.52601 11.763 8.47977C12.6185 8.43353 12.8497 8.43353 15 8.43353ZM15 7C12.8266 7 12.5491 7 11.6936 7.04624C10.8381 7.09249 10.2601 7.23121 9.75144 7.41618C9.21965 7.62428 8.78034 7.90173 8.34104 8.34104C7.90173 8.78035 7.62427 9.24277 7.41618 9.75144C7.20808 10.2601 7.09248 10.8381 7.04624 11.6936C7 12.549 7 12.8265 7 15C7 17.1735 7 17.451 7.04624 18.3064C7.09248 19.1618 7.23121 19.7399 7.41618 20.2486C7.62427 20.7803 7.90173 21.2197 8.34104 21.659C8.78034 22.0983 9.24277 22.3757 9.75144 22.5838C10.2601 22.7919 10.8381 22.9075 11.6936 22.9538C12.5491 23 12.8266 23 15 23C17.1734 23 17.4509 23 18.3064 22.9538C19.1618 22.9075 19.7399 22.7688 20.2486 22.5838C20.7803 22.3757 21.2196 22.0983 21.659 21.659C22.0983 21.2197 22.3757 20.7572 22.5838 20.2486C22.7919 19.7399 22.9075 19.1618 22.9538 18.3064C23 17.4509 23 17.1734 23 15C23 12.8266 23 12.5491 22.9538 11.6936C22.9075 10.8381 22.7688 10.2601 22.5838 9.75144C22.3757 9.21965 22.0983 8.78035 21.659 8.34104C21.2196 7.90173 20.7572 7.62428 20.2486 7.41618C19.7399 7.20809 19.1618 7.09249 18.3064 7.04624C17.4509 7 17.1734 7 15 7ZM15.0002 10.8844C12.7343 10.8844 10.8846 12.7341 10.8846 15C10.8846 17.2659 12.7343 19.1156 15.0002 19.1156C17.2661 19.1156 19.1158 17.2659 19.1158 15C19.1158 12.7341 17.2661 10.8844 15.0002 10.8844ZM15.0002 17.6589C13.5204 17.6589 12.3412 16.4566 12.3412 15C12.3412 13.5433 13.5435 12.341 15.0002 12.341C16.4568 12.341 17.6591 13.5433 17.6591 15C17.6591 16.4566 16.4568 17.6589 15.0002 17.6589ZM20.2483 10.7225C20.2483 11.2588 19.8136 11.6936 19.2772 11.6936C18.7409 11.6936 18.3062 11.2588 18.3062 10.7225C18.3062 10.1861 18.7409 9.75137 19.2772 9.75137C19.8136 9.75137 20.2483 10.1861 20.2483 10.7225Z" fill="white"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/vibrosculptlatam/" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <circle cx="15" cy="15" r="15" fill="#007BFF"/>
+              <path d="M15.9846 24V15.499H18.6472L19 12.5695H15.9846L15.9891 11.1033C15.9891 10.3392 16.0715 9.92982 17.3166 9.92982H18.9812V7H16.3182C13.1196 7 11.9938 8.42112 11.9938 10.811V12.5698H10V15.4993H11.9938V24H15.9846Z" fill="white"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer__legal">
+      <div class="footer__legal__menu">
+        <a href="#" class="footerBrand">Vibro Sculpt</a>
+        <a href="#">Accesibilidad</a>
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+      </div>
+      <div class="footer__legal__copyright">
+        <p>*Los resultados pueden variar según cada persona. La mayoría experimentará mejoras graduales. Los usuarios de Vibro Sculpt complementaron su uso con un plan de alimentación y ejercicio regular.<br>
+        Este dispositivo no es un producto médico y no está diseñado para tratar o diagnosticar enfermedades.</p>
+        <p>© 2026 Vibro Sculpt</p>
+      </div>
+    </section>
+  </footer>
+
+  <script>
+    /* Banner */
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.banner-slide');
+    const slidesWrapper = document.getElementById('bannerSlides');
+
+    function moveBanner(dir) {
+      currentSlide = (currentSlide + dir + slides.length) % slides.length;
+      slidesWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    setInterval(() => moveBanner(1), 5000);
+
+    /* Mobile menu */
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('is-open');
+      document.getElementById('menuOverlay').classList.toggle('is-open');
+    }
+
+    /* Newsletter */
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const success = document.getElementById('newsletterSuccess');
+      success.hidden = false;
+      e.target.querySelector('input[type="email"]').value = '';
+      setTimeout(() => { success.hidden = true; }, 5000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Guía de Uso | Vibro Sculpt</title>
+
+  <style>
+    :root{
+      --primary-color:#007BFF;
+      --primary-dark:#0053E2;
+      --ink:#0e3e59;
+      --bg:#fff;
+      --soft:#E6EEFC;
+      --line:#DADADA;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif;
+      color:#000;
+      background:var(--bg);
+    }
+    a{color:inherit}
+
+    /* ===== TOP BANNER (simple, sin Swiper) ===== */
+    .top-banner{
+      width:100%;
+      background:var(--primary-color);
+      color:#fff;
+      font-size:12px;
+      font-weight:500;
+      height:33px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .top-banner__slide{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      transition:opacity .35s ease;
+      letter-spacing:.02em;
+    }
+    .top-banner__slide.is-active{opacity:1}
+
+    /* ===== HEADER (aprox al theme) ===== */
+    .header_container{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:#fff;
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    header.header{
+      max-width:1200px;
+      margin:0 auto;
+      height:74px;
+      padding:0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .header_logo_container{
+      display:flex;
+      align-items:center;
+      text-decoration:none;
+    }
+    .header_menu_desk{
+      list-style:none;
+      display:flex;
+      gap:26px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+    .header_menu_desk a{
+      text-decoration:none;
+      font-weight:600;
+      letter-spacing:.02em;
+      font-size:13px;
+      color:#111;
+    }
+    .header_menu_desk a:hover{color:var(--primary-dark)}
+    .header_right{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .header_cart-btn{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      color:#111;
+      font-weight:600;
+      font-size:13px;
+    }
+    .header_cart-btn .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:20px;height:20px;
+      border-radius:999px;
+      background:#c40064;
+      color:#fff;
+      font-size:12px;
+      line-height:1;
+    }
+
+    @media (max-width: 820px){
+      .header_menu_desk{display:none}
+      header.header{height:64px}
+    }
+
+    /* ===== MAIN / HOW TO USE (copiado/ajustado) ===== */
+    main:has(.how-to-use) { overflow: initial; }
+
+    .how-to-use--banner{
+      padding: 60px 15px;
+      text-align: center;
+      background-color: var(--soft);
+      margin-bottom: 8px;
+    }
+    .how-to-use--banner h1{
+      color: var(--primary-dark);
+      text-align: center;
+      font-size: 35px;
+      font-weight: 500;
+      line-height: normal;
+      margin: 0 0 8px;
+      letter-spacing:.02em;
+    }
+    .how-to-use--banner p{
+      color: #000;
+      text-align: center;
+      font-size: 20px;
+      line-height: 21px;
+      margin: 0;
+    }
+
+    .how-to-use{
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1237px;
+      margin: 0 auto;
+      padding: 22px 20px;
+    }
+
+    .is-hidden{display:none !important}
+
+    .how-to-use__menu{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 30px 20px 20px;
+      border-radius: 5px;
+      border: 1px solid var(--line);
+      background:#fff;
+    }
+    .how-to-use__menu > h2{
+      text-align: left;
+      color: #242729;
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0;
+    }
+    .how-to-use__menu--nav label a{
+      display: block;
+      padding: 15px 20px;
+      color: #242729;
+      text-align: start;
+      font-size: 16px;
+      font-weight: 400;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      text-decoration:none;
+    }
+    .how-to-use__menu--nav label a:hover{
+      background: rgba(0,83,226,.08);
+    }
+
+    /* estados activos (usando radio) */
+    .how-to-use #input-contenido-de-la-caja:checked ~ .how-to-use__menu label[for="input-contenido-de-la-caja"] a,
+    .how-to-use #input-como-funcionan-las-almohadillas:checked ~ .how-to-use__menu label[for="input-como-funcionan-las-almohadillas"] a,
+    .how-to-use #input-uso-del-dispositivo:checked ~ .how-to-use__menu label[for="input-uso-del-dispositivo"] a,
+    .how-to-use #input-descargar-guia-de-uso:checked ~ .how-to-use__menu label[for="input-descargar-guia-de-uso"] a{
+      color:#fff;
+      background-color: var(--primary-dark);
+    }
+
+    .how-to-use__content--guide{
+      margin-bottom: 50px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      flex-direction:column;
+      gap:30px;
+    }
+    .how-to-use__content--guide:last-child{
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .how-to-use__content--guide h2{
+      color:#000;
+      font-size:30px;
+      font-weight:500;
+      margin:0;
+      text-align:start;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+    }
+    .how-to-use__content--guide video{
+      width:100%;
+      max-width: 640px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .how-to-use__content{width:100%}
+    .how-to-use__content--info{
+      margin: 20px 0;
+      text-align: start;
+    }
+    .how-to-use__content--info.mb-0{margin-bottom:0}
+    .how-to-use__content--info, .how-to-use__content--info > div{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+    .how-to-use__content--info h3{
+      color:#000;
+      font-size:20px;
+      font-weight:500;
+      margin:0;
+      text-transform:none;
+    }
+    .how-to-use__content--info h4{
+      color:#000;
+      font-size:18px;
+      font-weight:500;
+      line-height:normal;
+      margin:0;
+      text-align:start;
+    }
+    .title-color{ color: var(--primary-dark) !important; }
+    .how-to-use__content--info p, .how-to-use__content--info li{
+      color:#000;
+      font-size:16px;
+      font-weight:400;
+      line-height:156.25%;
+      margin:0;
+      text-align:left;
+    }
+    .how-to-use__content--info li b{font-weight:500}
+
+    .how-to-use__content--info ol{
+      margin-top:10px;
+      list-style-position: outside;
+      padding-left:20px;
+      margin-bottom:0;
+    }
+    .how-to-use__content--info ol.marked-color li::marker{
+      color: var(--primary-dark);
+      font-weight:bold;
+    }
+    .how-to-use__content--info ol.marked-color li b{color:var(--primary-dark)}
+    .how-to-use__content--info ul{
+      margin-top:0;
+      list-style: disc;
+      list-style-position: outside;
+      padding-left:20px;
+      margin-bottom:0;
+    }
+
+    @media (min-width: 768px){
+      .how-to-use{
+        flex-direction: row;
+        gap: 50px;
+      }
+      .how-to-use__menu{
+        position: sticky;
+        top: 90px; /* header + banner */
+        width: 100%;
+        max-width: 258px;
+        height: fit-content;
+      }
+      .how-to-use__content{
+        max-width: 720px;
+      }
+    }
+
+    /* ===== Download guide (del snippet) ===== */
+    .download-guide{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      width:50%;
+      gap:14px;
+    }
+    .download-guide img{width:100%; max-width:380px; border-radius:10px}
+    .download-guide-info{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      gap:10px;
+    }
+    .download-guide-info label{
+      font-size:25px;
+      margin:0;
+    }
+    .download-guide-info a{
+      background:#b5d9fe;
+      color:black;
+      font-size:20px;
+      padding:14px 18px;
+      width:100%;
+      max-width:340px;
+      text-align:center;
+      border-radius:5px;
+      text-decoration:none;
+      display:inline-block;
+    }
+    @media(max-width: 911px){
+      .download-guide{width:100%}
+    }
+
+    /* ================================
+      Vibro Sculpt — Footer (UPDATED)
+      (tu CSS tal cual, con mini-ajustes para tu markup)
+    ================================ */
+    .footer {
+      background: #eef3f7;
+      color: #0e3e59;
+      padding: 64px 20px 30px;
+    }
+    .footer a { color: inherit; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    .footer__nav, .footer__legal {
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer__nav {
+      display: grid;
+      grid-template-columns: 430px 1fr;
+      column-gap: 56px;
+      row-gap: 40px;
+      align-items: start;
+    }
+
+    .footer_form { width: 100%; }
+
+    .footer_form h2 {
+      margin: 0 0 16px;
+      color: #0b63ff;
+      font-weight: 800;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    /* adaptado a tu markup (.footer_form_row + .footer_submit) */
+    .footer_form_row{
+      position: relative;
+      display:block;
+      max-width: 420px;
+      margin-top: 10px;
+    }
+    .footer_form input[type="email"],
+    .footer_form input.email-addresss-footer {
+      width: 100%;
+      height: 54px;
+      padding: 0 58px 0 18px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(14, 62, 89, 0.55);
+      background: #ffffff;
+      outline: none;
+      font-size: 16px;
+      color: #0e3e59;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+    .footer_form input[type="email"]::placeholder,
+    .footer_form input.email-addresss-footer::placeholder {
+      color: rgba(14, 62, 89, 0.45);
+    }
+    .footer_form input[type="email"]:focus,
+    .footer_form input.email-addresss-footer:focus {
+      border-color: #0b63ff;
+      box-shadow: 0 0 0 4px rgba(11, 99, 255, 0.12);
+    }
+
+    .footer_submit{
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+    .footer_submit:hover { background: rgba(11, 99, 255, 0.08); }
+    .footer_submit:active { transform: translateY(-50%) scale(0.98); }
+    .footer_submit svg { width: 22px; height: 22px; display: block; }
+
+    .footer_form_help{
+      margin: 14px 0 0;
+      max-width: 420px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: rgba(14, 62, 89, 0.92);
+    }
+    .footer_form_success{
+      margin-top: 10px;
+      color: rgba(14, 62, 89, 0.92);
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+
+    .footer__nav__links {
+      display: grid;
+      grid-template-columns: 1fr 170px;
+      gap: 18px;
+      align-items: start;
+    }
+    .footer__nav__links__menus {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 52px;
+    }
+    .footer__nav__links__menus h4 {
+      margin: 0 0 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0b63ff;
+      letter-spacing: -0.01em;
+    }
+    .footer__nav__links__menus a {
+      display: block;
+      margin: 10px 0;
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: rgba(14, 62, 89, 0.95);
+    }
+
+    /* Social SOLO íconos */
+    .footer__nav__social {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 36px;
+    }
+    .footer__nav__social a {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      transform: translateY(0);
+      transition: transform 150ms ease, filter 150ms ease;
+    }
+    .footer__nav__social a:hover { transform: translateY(-1px); filter: brightness(1.02); }
+    .footer__nav__social svg { width: 34px; height: 34px; display: block; }
+
+    .footer__legal {
+      margin-top: 44px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(14, 62, 89, 0.12);
+    }
+    .footer__legal__menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .footer__legal__menu a {
+      font-size: 13.5px;
+      color: rgba(14, 62, 89, 0.95);
+    }
+
+    .footer__legal__copyright {
+      text-align: center;
+      color: rgba(14, 62, 89, 0.88);
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .footer__legal__copyright p {
+      margin: 10px 0;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1024px) {
+      .footer__nav { grid-template-columns: 1fr; }
+      .footer__nav__links { grid-template-columns: 1fr; }
+      .footer__nav__social { margin-top: 12px; }
+    }
+    @media (max-width: 640px) {
+      .footer { padding: 52px 16px 26px; }
+      .footer_form h2 { font-size: 26px; }
+      .footer_form_row { max-width: 100%; }
+      .footer__nav__links__menus { grid-template-columns: 1fr; gap: 22px; }
+      .footer__legal__menu { gap: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top banner -->
+  <div class="top-banner" aria-label="Top banner">
+    <div class="top-banner__slide is-active">GARANTÍA DE SATISFACCIÓN</div>
+    <div class="top-banner__slide">SOPORTE 24/7</div>
+  </div>
+
+  <!-- Header -->
+  <div class="header_container">
+    <header class="header">
+      <a class="header_logo_container" href="/" aria-label="Vibro Sculpt">
+        <!-- Logo (SVG de tu theme: simplificado a placeholder si no tienes el SVG completo) -->
+        <img src="https://cdn.shopify.com/s/files/1/0299/7698/5659/files/vibrosculpt-logo.png?v=1664470171"
+             alt="Vibro Sculpt" width="140" height="30" style="display:block;height:30px;width:auto" />
+      </a>
+
+      <ul class="header_menu_desk" aria-label="Menu">
+        <li><a href="/pages/inicio">INICIO</a></li>
+        <li><a href="/">VIBRO SCULPT</a></li>
+        <li><a href="/pages/sobre-nosotros">NOSOTROS</a></li>
+      </ul>
+
+      <div class="header_right">
+        <a class="header_cart-btn" href="/cart" aria-label="Carrito">
+          Carrito <span class="badge" aria-label="Items en carrito">1</span>
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <section class="how-to-use--banner">
+      <h1>GUÍA DE USO</h1>
+      <p>Todo lo que necesitas saber para aprovechar al máximo tu dispositivo.</p>
+    </section>
+
+    <section class="how-to-use">
+
+      <!-- radios para el estado activo del menú -->
+      <input type="radio" name="guide" id="input-contenido-de-la-caja" class="is-hidden" checked />
+      <input type="radio" name="guide" id="input-como-funcionan-las-almohadillas" class="is-hidden" />
+      <input type="radio" name="guide" id="input-uso-del-dispositivo" class="is-hidden" />
+      <input type="radio" name="guide" id="input-descargar-guia-de-uso" class="is-hidden" />
+
+      <aside class="how-to-use__menu">
+        <h2>Guías de uso</h2>
+        <div class="how-to-use__menu--nav">
+          <label for="input-contenido-de-la-caja">
+            <a href="#contenido-de-la-caja" data-guide-link>Contenido de la caja</a>
+          </label>
+
+          <label for="input-como-funcionan-las-almohadillas">
+            <a href="#como-funcionan-las-almohadillas" data-guide-link>Cómo funcionan las almohadillas</a>
+          </label>
+
+          <label for="input-uso-del-dispositivo">
+            <a href="#uso-del-dispositivo" data-guide-link>Uso del Dispositivo</a>
+          </label>
+
+          <label for="input-descargar-guia-de-uso">
+            <a href="#descargar-guia-de-uso" data-guide-link>Descargar guía de uso</a>
+          </label>
+        </div>
+      </aside>
+
+      <aside class="how-to-use__content">
+
+        <article id="contenido-de-la-caja" class="how-to-use__content--guide guide-contenido-de-la-caja">
+          <h2>Contenido de la caja</h2>
+
+          <div class="how-to-use__content--info">
+            <h3 class="title-color">¿Qué incluye?</h3>
+            <p>Manual de instrucciones, Vibro Sculpt, 6 almohadillas moldeadoras y cable de carga.</p>
+          </div>
+
+          <video poster="//compravibrosculpt.com/cdn/shop/files/Unboxing.png?v=1760634871&width=1000"
+                 src="https://cdn.shopify.com/videos/c/o/v/29871beece2d45859e69103ff54a6fe8.mp4"
+                 playsinline muted loop autoplay controls controlslist="nodownload"></video>
+        </article>
+
+        <article id="como-funcionan-las-almohadillas" class="how-to-use__content--guide guide-como-funcionan-las-almohadillas">
+          <h2>Cómo funcionan las almohadillas</h2>
+
+          <div class="how-to-use__content--info">
+            <div>
+              <p>
+                Vibro Sculpt incluye 6 almohadillas moldeadoras (4 blancas, una azul y una naranja) diseñadas especialmente para optimizar tu rutina de moldeado corporal.<br>
+                Estas almohadillas trabajan junto con la tecnología de microvibraciones y microcompresiones de Vibro Sculpt para tonificar, reafirmar y mejorar la apariencia de la piel en cada sesión.
+              </p>
+
+              <p>
+                <strong>Conoce los beneficios de las almohadillas:</strong><br>
+                Almohadilla Blanca → Reduce grasa localizada, tonifica y mejora la apariencia de estrías.<br>
+                Almohadilla Azul → Reafirma la piel y previene la flacidez.<br>
+                Almohadilla Naranja → Optimiza la absorción de geles y aceites para mayor hidratación y suavidad.
+              </p>
+
+              <h3 class="title-color">Cómo limpiar</h3>
+              <p>
+                Lava las almohadillas a mano y déjalas secar al aire. La frecuencia de lavado depende del uso.
+                Limpia las almohadillas siempre que se ensucien.
+              </p>
+            </div>
+
+            <div>
+              <div>
+                <h3 class="title-color">Cómo colocar las almohadillas en tu Vibro Sculpt</h3>
+                <ol>
+                  <li>Asegúrate de que el dispositivo Vibro Sculpt esté apagado antes de colocar la almohadilla.</li>
+                  <li>Sujeta la almohadilla con ambas manos y alinéala con el cabezal del dispositivo.</li>
+                  <li>Estira la almohadilla suavemente con los dedos, asegurándote de cubrir los bordes de manera uniforme. Comienza desde un lado y sigue alrededor, asegurándote de que la almohadilla esté bien ajustada sobre el cabezal del dispositivo.</li>
+                </ol>
+              </div>
+
+              <div>
+                <h3 class="title-color">Cómo retirar las almohadillas</h3>
+                <ol>
+                  <li>Despega lentamente la almohadilla del cabezal del dispositivo, levantándola de manera uniforme.</li>
+                  <li>Empieza por un lado y continúa alrededor para evitar estirarla o rasgarla.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <video poster="//compravibrosculpt.com/cdn/shop/files/Understanding_Sculpting_Pads.png?v=1760634805&width=1000"
+                 src="https://cdn.shopify.com/videos/c/o/v/d8fae5df8489428db2088a166bee5e6f.mp4"
+                 playsinline muted loop autoplay controls controlslist="nodownload"></video>
+        </article>
+
+        <article id="uso-del-dispositivo" class="how-to-use__content--guide guide-uso-del-dispositivo">
+          <h2>Uso del Dispositivo</h2>
+
+          <div class="how-to-use__content--info">
+            <div>
+              <p>Asegúrate de que el dispositivo esté conectado a la corriente y encendido.</p>
+
+              <div>
+                <h4>Control Giratorio</h4>
+                <ol>
+                  <li>Gira hacia la derecha para aumentar la velocidad.</li>
+                  <li>Gira hacia la izquierda para disminuirla.</li>
+                </ol>
+              </div>
+
+              <h3 class="title-color">Paso a paso</h3>
+
+              <div>
+                <h4>Paso 1</h4>
+                <p>Toma la almohadilla moldeadora y colócala en el dispositivo asegurándote de que quede bien ajustada.</p>
+                <br>
+
+                <h4>Paso 2</h4>
+                <p>Enciende el dispositivo y masajea la zona deseada durante 15 minutos con movimientos circulares y suaves.</p>
+                <br>
+
+                <h4>Paso 3</h4>
+                <p>Repite esta rutina de 3 a 4 veces por semana para obtener mejores resultados.</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="title-color">Cómo mantener tu dispositivo</h3>
+              <ul>
+                <li><b>Almacenamiento adecuado:</b> Guarda el dispositivo en un lugar seguro para prevenir caídas o rasguños.</li>
+                <li><b>Evita daños por agua:</b> No sumerjas el dispositivo en agua.</li>
+                <li><b>Limpieza regular:</b> Limpia el dispositivo y sus almohadillas regularmente.</li>
+                <li><b>Reemplazo de almohadillas:</b> Sustituye las almohadillas moldeadoras por unas nuevas cada 1 a 2 meses para mantener la potencia y los resultados óptimos. *El tiempo puede variar según la frecuencia de uso.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="title-color">Advertencias de uso</h3>
+              <ul>
+                <li>No utilices el dispositivo sobre piel seca o irritada. Puedes utilizar crema o aceite corporal para deslizar más fácil el dispositivo sobre la piel.</li>
+                <li>Mantén el dispositivo en movimiento, no lo dejes fijo más de 30 segundos sobre una misma zona.</li>
+                <li>No lo uses sobre el ombligo, papada ni cuello.</li>
+              </ul>
+            </div>
+          </div>
+
+          <video poster="//compravibrosculpt.com/cdn/shop/files/Device_Usage.png?v=1760634883&width=1000"
+                 src="https://cdn.shopify.com/videos/c/o/v/4d5401c1b7634372b13a7ad69de3c30c.mp4"
+                 playsinline muted loop autoplay controls controlslist="nodownload"></video>
+        </article>
+
+        <article id="descargar-guia-de-uso" class="how-to-use__content--guide guide-descargar-guia-de-uso">
+          <h2>Descargar guía de uso</h2>
+
+          <div class="how-to-use__content--info">
+            <div class="download-guide">
+              <img src="https://cdn.shopify.com/s/files/1/0911/0913/0522/files/vibro.webp?v=1769704868" alt="Vibro Sculpt">
+
+              <div class="download-guide-info">
+                <p>Guía de usuario</p>
+                <label>Vibro Sculpt 1.0</label>
+                <a href="https://compravibrosculpt.com/cdn/shop/files/VS_Manual_Multi_Language.pdf" download>Multilenguaje</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </aside>
+    </section>
+  </main>
+
+  <!-- FOOTER (tu versión) -->
+  <footer class="footer">
+    <section class="footer__nav">
+      <form id="newsletter-footer" class="footer_form">
+        <h2>No te pierdas nada de <br> Vibro Sculpt.</h2>
+
+        <div class="footer_form_row">
+          <input type="email" class="email-addresss-footer" name="email" placeholder="Email" required />
+          <button aria-label="Subscribe" type="submit" class="footer_submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M12 5L19 12L12 19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+
+        <p class="footer_form_help">
+          Ingresa tu correo para recibir las mejores ofertas, consejos de fitness, bienestar y lanzamientos exclusivos.
+        </p>
+
+        <p class="footer_form_success" id="newsletterSuccess" hidden>¡Gracias por suscribirte!</p>
+      </form>
+
+      <div class="footer__nav__links">
+        <div class="footer__nav__links__menus">
+          <div>
+            <h4>Inicio</h4>
+            <a href="#">Vibro Sculpt</a>
+            <a href="https://vibrosculpt.com/" target="_blank" rel="noreferrer">Vibro Sculpt US</a>
+          </div>
+
+          <div>
+            <h4>Nosotros</h4>
+            <a href="#">Nosotros</a>
+            <a href="#">Contacto</a>
+          </div>
+
+          <div>
+            <h4>Ayuda</h4>
+            <a href="https://help.compravibrosculpt.com/en-US" target="_blank" rel="noreferrer">Centro de ayuda</a>
+            <a href="#">Guías de uso</a>
+          </div>
+        </div>
+
+        <div class="footer__nav__social" aria-label="Redes sociales">
+          <a href="https://www.instagram.com/vibrosculptlatam" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <!-- icono -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 30 30" fill="none">
+              <circle cx="15" cy="15" r="15" fill="#007BFF"></circle>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15 8.43353C17.1272 8.43353 17.3815 8.43353 18.237 8.47977C19.0231 8.52601 19.4393 8.64162 19.7168 8.75723C20.0867 8.89595 20.3642 9.08092 20.6416 9.35838C20.9191 9.63584 21.104 9.91329 21.2428 10.2832C21.3584 10.5607 21.474 11 21.5202 11.763C21.5665 12.6185 21.5665 12.8497 21.5665 15C21.5665 17.1503 21.5665 17.3815 21.5202 18.237C21.474 19.0231 21.3584 19.4393 21.2428 19.7168C21.104 20.0867 20.9191 20.3642 20.6416 20.6416C20.3642 20.9191 20.0867 21.104 19.7168 21.2428C19.4393 21.3584 19 21.474 18.237 21.5202C17.3815 21.5665 17.1503 21.5665 15 21.5665C12.8497 21.5665 12.6185 21.5665 11.763 21.5202C10.9769 21.474 10.5607 21.3584 10.2832 21.2428C9.91329 21.104 9.63583 20.9191 9.35837 20.6416C9.08092 20.3642 8.89595 20.0867 8.75722 19.7168C8.64161 19.4393 8.52601 19 8.47977 18.237C8.43352 17.3815 8.43352 17.1503 8.43352 15C8.43352 12.8497 8.43352 12.6185 8.47977 11.763C8.52601 10.9769 8.64161 10.5607 8.75722 10.2832C8.89595 9.91329 9.08092 9.63584 9.35837 9.35838C9.63583 9.08092 9.91329 8.89595 10.2832 8.75723C10.5607 8.64162 11 8.52601 11.763 8.47977C12.6185 8.43353 12.8497 8.43353 15 8.43353ZM15 7C12.8266 7 12.5491 7 11.6936 7.04624C10.8381 7.09249 10.2601 7.23121 9.75144 7.41618C9.21965 7.62428 8.78034 7.90173 8.34104 8.34104C7.90173 8.78035 7.62427 9.24277 7.41618 9.75144C7.20808 10.2601 7.09248 10.8381 7.04624 11.6936C7 12.549 7 12.8265 7 14.9989V15V15.0011C7 17.1735 7 17.451 7.04624 18.3064C7.09248 19.1618 7.23121 19.7399 7.41618 20.2486C7.62427 20.7803 7.90173 21.2197 8.34104 21.659C8.78034 22.0983 9.24277 22.3757 9.75144 22.5838C10.2601 22.7919 10.8381 22.9075 11.6936 22.9538C12.5491 23 12.8266 23 15 23C17.1734 23 17.4509 23 18.3064 22.9538C19.1618 22.9075 19.7399 22.7688 20.2486 22.5838C20.7803 22.3757 21.2196 22.0983 21.659 21.659C22.0983 21.2197 22.3757 20.7572 22.5838 20.2486C22.7919 19.7399 22.9075 19.1618 22.9538 18.3064C23 17.4509 23 17.1734 23 15C23 12.8266 23 12.5491 22.9538 11.6936C22.9075 10.8381 22.7688 10.2601 22.5838 9.75144C22.3757 9.21965 22.0983 8.78035 21.659 8.34104C21.2196 7.90173 20.7572 7.62428 20.2486 7.41618C19.7399 7.20809 19.1618 7.09249 18.3064 7.04624C17.4509 7 17.1734 7 15 7ZM15.0002 10.8844C12.7343 10.8844 10.8846 12.7341 10.8846 15C10.8846 17.2659 12.7343 19.1156 15.0002 19.1156C17.2661 19.1156 19.1158 17.2659 19.1158 15C19.1158 12.7341 17.2661 10.8844 15.0002 10.8844ZM15.0002 17.6589C13.5204 17.6589 12.3412 16.4566 12.3412 15C12.3412 13.5433 13.5435 12.341 15.0002 12.341C16.4568 12.341 17.6591 13.5433 17.6591 15C17.6591 16.4566 16.4568 17.6589 15.0002 17.6589ZM20.2483 10.7225C20.2483 11.2588 19.8136 11.6936 19.2772 11.6936C18.7409 11.6936 18.3062 11.2588 18.3062 10.7225C18.3062 10.1861 18.7409 9.75137 19.2772 9.75137C19.8136 9.75137 20.2483 10.1861 20.2483 10.7225Z" fill="white"/>
+            </svg>
+          </a>
+
+          <a href="https://www.facebook.com/vibrosculptlatam/" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 30 30" fill="none">
+              <circle cx="15" cy="15" r="15" fill="#007BFF"></circle>
+              <path d="M15.9846 24V15.499H18.6472L19 12.5695H15.9846L15.9891 11.1033C15.9891 10.3392 16.0715 9.92982 17.3166 9.92982H18.9812V7H16.3182C13.1196 7 11.9938 8.42112 11.9938 10.811V12.5698H10V15.4993H11.9938V24H15.9846Z" fill="white"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer__legal">
+      <div class="footer__legal__menu">
+        <a href="#" class="footerBrand">Vibro Sculpt</a>
+        <a href="#">Accesibilidad</a>
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+      </div>
+
+      <div class="footer__legal__copyright">
+        <p>
+          *Los resultados pueden variar según cada persona. La mayoría experimentará mejoras graduales.
+          Los usuarios de Vibro Sculpt complementaron su uso con un plan de alimentación y ejercicio regular.
+          <br>
+          Este dispositivo no es un producto médico y no está diseñado para tratar o diagnosticar enfermedades.
+        </p>
+        <p>© 2026 Vibro Sculpt</p>
+      </div>
+    </section>
+  </footer>
+
+  <script>
+    // Top banner rotator (simple)
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.top-banner__slide'));
+      if (slides.length <= 1) return;
+      let i = 0;
+      setInterval(() => {
+        slides[i].classList.remove('is-active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('is-active');
+      }, 5000);
+    })();
+
+    // Sticky header offset smooth scroll + radio activation
+    function scrollToAnchorWithHeaderOffset(anchorId) {
+      const target = document.querySelector(anchorId);
+      if (!target) return;
+
+      const header = document.querySelector('.header_container');
+      const headerHeight = header ? header.offsetHeight : 0;
+
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - headerHeight - 10,
+        behavior: 'smooth'
+      });
+    }
+
+    document.querySelectorAll('[data-guide-link]').forEach((a) => {
+      a.addEventListener('click', (event) => {
+        event.preventDefault();
+        const href = a.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+
+        // activa el radio del label
+        const label = a.closest('label');
+        if (label) label.click();
+
+        scrollToAnchorWithHeaderOffset(href);
+
+        // actualiza hash sin saltar
+        history.replaceState(null, '', href);
+      });
+    });
+
+    // Newsletter demo (no integra Klaviyo; solo UX)
+    document.getElementById('newsletter-footer')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const success = document.getElementById('newsletterSuccess');
+      if (success) success.hidden = false;
+      setTimeout(() => { if (success) success.hidden = true; }, 3500);
+      e.target.reset();
+    });
+
+    // Si llega con hash, scroll con offset
+    window.addEventListener('load', () => {
+      if (location.hash) {
+        const hash = location.hash;
+        // intenta activar radio relacionado
+        const map = {
+          '#contenido-de-la-caja': 'input-contenido-de-la-caja',
+          '#como-funcionan-las-almohadillas': 'input-como-funcionan-las-almohadillas',
+          '#uso-del-dispositivo': 'input-uso-del-dispositivo',
+          '#descargar-guia-de-uso': 'input-descargar-guia-de-uso',
+        };
+        const id = map[hash];
+        if (id) document.getElementById(id)?.click();
+
+        // espera un tick para que el layout estabilice
+        setTimeout(() => scrollToAnchorWithHeaderOffset(hash), 60);
+      }
+    });
+  </script>
+</body>
+</html>

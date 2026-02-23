@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contacto — Vibro Sculpt (Preview)</title>
+
+  <style>
+    :root{
+      --primary:#007bff;
+      --ink:#0e3e59;
+      --muted:#6b7c88;
+      --bg:#ffffff;
+      --panel:#eef3f7;        /* fondo general suave como en tu screenshot */
+      --card:#e9eff4;         /* caja superior */
+      --border:#d9e0e7;
+      --shadow: 0 1px 0 rgba(14,62,89,.04);
+      --container: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    a{ color: inherit; }
+
+    /* ===== Top banner (simple rotator) ===== */
+    .top-banner{
+      background: var(--primary);
+      color:#fff;
+      width:100%;
+      position: relative;
+    }
+    .top-banner__inner{
+      max-width: var(--container);
+      margin: 0 auto;
+      min-height: 33px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 0 44px;
+      position: relative;
+      text-align:center;
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.2px;
+    }
+    .top-banner__arrow{
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .top-banner__arrow--prev{ left:0; }
+    .top-banner__arrow--next{ right:0; }
+    .top-banner__arrow::after{
+      content:"";
+      width:8px;height:8px;
+      border-top:2px solid #fff;
+      border-right:2px solid #fff;
+      transform: rotate(45deg);
+      display:block;
+      opacity:.95;
+    }
+    .top-banner__arrow--prev::after{ transform: rotate(225deg); }
+    .top-banner__slide{ display:none; }
+    .top-banner__slide.is-active{ display:block; }
+
+    /* ===== Header minimal (solo para preview visual) ===== */
+    .header{
+      background:#fff;
+      border-bottom:1px solid rgba(14,62,89,.08);
+    }
+    .header__inner{
+      max-width: var(--container);
+      margin:0 auto;
+      padding: 18px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 36px;
+    }
+    .header__logo{
+      font-weight:700;
+      font-size: 22px;
+      opacity:.7;
+    }
+    .header__nav{
+      display:flex;
+      gap: 28px;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.6px;
+    }
+    .header__nav a{
+      text-decoration:none;
+      color:#111;
+    }
+
+    /* ===== Main page ===== */
+    .page{
+      background: var(--panel);
+      padding: 56px 20px 70px;
+    }
+    .container{
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+
+    .contact-hero{
+      max-width: 760px;
+      margin: 0 auto 26px;
+      background: var(--card);
+      border-radius: 10px;
+      padding: 26px 26px;
+      box-shadow: var(--shadow);
+      text-align:center;
+    }
+    .contact-hero h1{
+      margin:0 0 10px;
+      font-size: 28px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .contact-hero p{
+      margin:0;
+      color:#1b2b34;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .contact-hero a{
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .contact-hero a:hover{ text-decoration: underline; }
+
+    /* form */
+    .contact-form-wrap{
+      max-width: 760px;
+      margin: 0 auto;
+      background: transparent;
+    }
+
+    .contact-form{
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .fields-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 14px;
+      align-items:start;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+    }
+
+    label{
+      font-size: 13px;
+      color:#1b2b34;
+    }
+
+    input, textarea{
+      width:100%;
+      border:1px solid var(--border);
+      background:#fff;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline:none;
+      border-radius: 2px;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    textarea{
+      min-height: 240px;
+      resize: vertical;
+      padding: 14px;
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(0,123,255,.6);
+      box-shadow: 0 0 0 3px rgba(0,123,255,.12);
+    }
+
+    .span-2{ grid-column: 1 / -1; }
+
+    .actions{
+      margin-top: 16px;
+    }
+    .btn{
+      background: var(--primary);
+      color:#fff;
+      border:none;
+      width: 300px;
+      height: 44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      cursor:pointer;
+      border-radius: 2px;
+    }
+    .btn:hover{ filter: brightness(.95); }
+
+    .form-note{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ====== Footer (tu CSS pegado tal cual) ====== */
+    /* ===========================
+      Vibro Sculpt — Footer (full)
+      =========================== */
+
+    /* Root */
+    .footer {
+      background: #eef3f7;
+      color: #0e3e59;
+      padding: 64px 20px 30px;
+    }
+
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .footer a:hover { text-decoration: underline; }
+
+    /* Containers */
+    .footer__nav,
+    .footer__legal {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* ===========================
+      TOP AREA (newsletter + menus)
+      =========================== */
+
+    .footer__nav {
+      display: grid;
+      grid-template-columns: 430px 1fr;
+      column-gap: 56px;
+      row-gap: 40px;
+      align-items: start;
+    }
+
+    /* Newsletter */
+    .footer_form h2 {
+      margin: 0 0 16px;
+      color: #0b63ff;
+      font-weight: 800;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    /* Make form controls deterministic */
+    .footer_form .klaviyo_field_group,
+    .footer_form .klaviyo_form_actions {
+      width: 100%;
+    }
+
+    /* Input wrap (button inside the field) */
+    .footer_form .klaviyo_form_actions {
+      position: relative;
+      display: block !important;
+      max-width: 420px;
+      margin-top: 10px;
+    }
+
+    /* Email input */
+    .footer_form input[type="email"],
+    .footer_form input.email-addresss-footer {
+      width: 100%;
+      height: 54px;
+      padding: 0 58px 0 18px; /* room for the arrow */
+      border-radius: 10px;
+      border: 1.5px solid rgba(14, 62, 89, 0.55);
+      background: #fff;
+      outline: none;
+      font-size: 16px;
+      color: #0e3e59;
+    }
+
+    .footer_form input[type="email"]::placeholder,
+    .footer_form input.email-addresss-footer::placeholder {
+      color: rgba(14, 62, 89, 0.45);
+    }
+
+    .footer_form input[type="email"]:focus,
+    .footer_form input.email-addresss-footer:focus {
+      border-color: #0b63ff;
+      box-shadow: 0 0 0 4px rgba(11, 99, 255, 0.12);
+    }
+
+    /* Submit (arrow) inside the input */
+    .footer_form .klaviyo_submit_button {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      padding: 0;
+    }
+
+    .footer_form .klaviyo_submit_button:hover {
+      background: rgba(11, 99, 255, 0.08);
+    }
+
+    .footer_form .klaviyo_submit_button svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    /* Helper text */
+    .footer_form > p {
+      margin: 14px 0 0;
+      max-width: 420px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: rgba(14, 62, 89, 0.92);
+    }
+
+    /* Success message spacing */
+    .footer_form .klaviyo_messages {
+      margin-top: 10px;
+    }
+
+    /* ===========================
+      RIGHT SIDE (menus + social)
+      =========================== */
+
+    .footer__nav__links {
+      display: grid;
+      grid-template-columns: 1fr 170px; /* menus + social column */
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* Menus (3 columns) */
+    .footer__nav__links__menus {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 52px;
+    }
+
+    .footer__nav__links__menus h4 {
+      margin: 0 0 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0b63ff;
+      letter-spacing: -0.01em;
+    }
+
+    .footer__nav__links__menus a {
+      display: block;
+      margin: 10px 0;
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: rgba(14, 62, 89, 0.95);
+    }
+
+    /* Social icons (inline SVG buttons) */
+    .footer__nav__social {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 36px; /* aligns visually with lists as in your reference */
+    }
+
+    /* Important: avoid any accidental text showing */
+    .footer__nav__social a {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      background: var(--primary);
+      color: transparent;
+    }
+
+    .footer__nav__social a:hover {
+      transform: translateY(-1px);
+    }
+
+    /* ===========================
+      LEGAL AREA
+      =========================== */
+
+    .footer__legal {
+      margin-top: 44px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(14, 62, 89, 0.12);
+    }
+
+    .footer__legal__menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .footer__legal__menu a {
+      font-size: 13.5px;
+      color: rgba(14, 62, 89, 0.95);
+    }
+
+    /* Copyright text */
+    .footer__legal__copyright {
+      text-align: center;
+      color: rgba(14, 62, 89, 0.88);
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .footer__legal__copyright p {
+      margin: 10px 0;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    /* ===========================
+      Responsive
+      =========================== */
+
+    @media (max-width: 900px){
+      .header__inner{
+        justify-content: space-between;
+      }
+      .header__nav{ gap: 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .fields-grid{
+        grid-template-columns: 1fr;
+      }
+      .btn{
+        width: 100%;
+      }
+      .footer__nav {
+        grid-template-columns: 1fr;
+      }
+
+      .footer__nav__links {
+        grid-template-columns: 1fr;
+      }
+
+      .footer__nav__social {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer {
+        padding: 52px 16px 26px;
+      }
+
+      .footer_form h2 {
+        font-size: 26px;
+      }
+
+      .footer_form .klaviyo_form_actions {
+        max-width: 100%;
+      }
+
+      .footer__nav__links__menus {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .footer__legal__menu {
+        gap: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top banner -->
+  <div class="top-banner" role="region" aria-label="Top banner">
+    <div class="top-banner__inner">
+      <div class="top-banner__arrow top-banner__arrow--prev" aria-label="Anterior" role="button" tabindex="0"></div>
+
+      <p class="top-banner__slide is-active" data-slide>GARANTÍA DE SATISFACCIÓN</p>
+      <p class="top-banner__slide" data-slide>SOPORTE 24/7</p>
+
+      <div class="top-banner__arrow top-banner__arrow--next" aria-label="Siguiente" role="button" tabindex="0"></div>
+    </div>
+  </div>
+
+  <!-- Header (preview) -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__logo">VibroSculpt</div>
+      <nav class="header__nav" aria-label="Navegación principal">
+        <a href="#">INICIO</a>
+        <a href="#">VIBRO SCULPT</a>
+        <a href="#">NOSOTROS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page">
+    <div class="container">
+      <section class="contact-hero" aria-labelledby="contact-title">
+        <h1 id="contact-title">PONTE EN CONTACTO CON NOSOTROS</h1>
+        <p>
+          Estamos aquí para responder cualquier pregunta y brindarle el apoyo que necesita.
+          Contáctenos a través del siguiente formulario o envíenos un correo electrónico a
+          <a href="mailto:hola@compravibrosculpt.com">hola@compravibrosculpt.com</a>.
+          Nos comunicaremos con usted lo antes posible.
+        </p>
+      </section>
+
+      <section class="contact-form-wrap" aria-label="Formulario de contacto">
+        <form class="contact-form" id="ContactForm" action="#" method="post" novalidate>
+          <div class="fields-grid">
+            <div class="field">
+              <label for="name">Nombre</label>
+              <input id="name" name="contact[Nombre]" type="text" placeholder="Nombre" autocomplete="name" />
+            </div>
+
+            <div class="field">
+              <label for="email">Correo electrónico *</label>
+              <input id="email" name="contact[email]" type="email" placeholder="Correo electrónico" autocomplete="email" required />
+            </div>
+
+            <div class="field span-2">
+              <label for="phone">Número de teléfono</label>
+              <input id="phone" name="contact[Número de teléfono]" type="tel" placeholder="Número de teléfono" autocomplete="tel" />
+            </div>
+
+            <div class="field span-2">
+              <label for="message">Mensaje</label>
+              <textarea id="message" name="contact[Mensaje]" placeholder="Mensaje"></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Enviar</button>
+            <div class="form-note" id="formNote" aria-live="polite"></div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER (tu markup) -->
+  <footer class="footer">
+    <section class="footer__nav">
+      <form id="newsletter-footer" class="footer_form">
+        <h2>No te pierdas nada de <br> Vibro Sculpt.</h2>
+
+        <!-- En tu CSS original esto se llamaba klaviyo_form_actions; lo dejo igual para que el estilo aplique -->
+        <div class="klaviyo_form_actions">
+          <input type="email" class="email-addresss-footer" name="email" placeholder="Email" required>
+          <button aria-label="Subscribe" type="submit" class="klaviyo_submit_button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M12 5L19 12L12 19" stroke="#0E3E59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+
+        <p>
+          Ingresa tu correo para recibir las mejores ofertas, consejos de fitness, bienestar y lanzamientos exclusivos.
+        </p>
+
+        <div class="klaviyo_messages">
+          <div class="success_message" id="newsletterSuccess" style="display:none;">
+            <p style="color:#0E3E59" class="form--success">¡Gracias por suscribirte!</p>
+          </div>
+        </div>
+      </form>
+
+      <div class="footer__nav__links">
+        <div class="footer__nav__links__menus">
+          <div>
+            <h4>Inicio</h4>
+            <a href="#">Vibro Sculpt</a>
+            <a href="https://vibrosculpt.com/" target="_blank" rel="noreferrer">Vibro Sculpt US</a>
+          </div>
+
+          <div>
+            <h4>Nosotros</h4>
+            <a href="#">Nosotros</a>
+            <a href="#">Contacto</a>
+          </div>
+
+          <div>
+            <h4>Ayuda</h4>
+            <a href="https://help.compravibrosculpt.com/en-US" target="_blank" rel="noreferrer">Centro de ayuda</a>
+            <a href="#">Guías de uso</a>
+          </div>
+        </div>
+
+        <div class="footer__nav__social" aria-label="Redes sociales">
+          <a href="https://www.instagram.com/vibrosculptlatam" target="_blank" rel="noreferrer" aria-label="Instagram">Instagram</a>
+          <a href="https://www.facebook.com/vibrosculptlatam/" target="_blank" rel="noreferrer" aria-label="Facebook">Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer__legal">
+      <div class="footer__legal__menu">
+        <a href="#" class="footerBrand">Vibro Sculpt</a>
+        <a href="#">Accesibilidad</a>
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+      </div>
+
+      <div class="footer__legal__copyright">
+        <p>
+          *Los resultados pueden variar según cada persona. La mayoría experimentará mejoras graduales.
+          Los usuarios de Vibro Sculpt complementaron su uso con un plan de alimentación y ejercicio regular.
+          <br>
+          Este dispositivo no es un producto médico y no está diseñado para tratar o diagnosticar enfermedades.
+        </p>
+        <p>© 2026 Vibro Sculpt</p>
+      </div>
+    </section>
+  </footer>
+
+  <script>
+    // ===== top banner rotator (no swiper) =====
+    (function(){
+      const slides = Array.from(document.querySelectorAll("[data-slide]"));
+      const prev = document.querySelector(".top-banner__arrow--prev");
+      const next = document.querySelector(".top-banner__arrow--next");
+      if (!slides.length) return;
+
+      let i = slides.findIndex(s => s.classList.contains("is-active"));
+      if (i < 0) i = 0;
+
+      function render(){
+        slides.forEach((s, idx) => s.classList.toggle("is-active", idx === i));
+      }
+
+      function go(dir){
+        i = (i + dir + slides.length) % slides.length;
+        render();
+      }
+
+      prev?.addEventListener("click", ()=>go(-1));
+      next?.addEventListener("click", ()=>go(1));
+
+      prev?.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(-1);} });
+      next?.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(1);} });
+
+      setInterval(()=>go(1), 5000);
+      render();
+    })();
+
+    // ===== contact form (preview validation) =====
+    (function(){
+      const form = document.getElementById("ContactForm");
+      const note = document.getElementById("formNote");
+      if(!form) return;
+
+      form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        note.textContent = "";
+
+        const email = form.querySelector("#email");
+        if(!email.value.trim()){
+          note.textContent = "Por favor ingresa tu correo electrónico.";
+          email.focus();
+          return;
+        }
+
+        // Solo preview (aquí Shopify manejaría el POST real)
+        note.textContent = "Preview: formulario listo (en Shopify enviará a /contact).";
+      });
+    })();
+
+    // ===== newsletter (preview) =====
+    (function(){
+      const form = document.getElementById("newsletter-footer");
+      const success = document.getElementById("newsletterSuccess");
+      if(!form) return;
+
+      form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        if(success) success.style.display = "block";
+      });
+    })();
+  </script>
+</body>
+</html>
